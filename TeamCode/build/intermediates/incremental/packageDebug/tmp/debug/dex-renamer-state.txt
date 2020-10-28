@@ -1,10 +1,10 @@
-#Sun Oct 25 18:34:07 EDT 2020
+#Tue Oct 27 20:40:29 EDT 2020
 path.2=classes_0.dex
 path.1=classes.dex
 path.0=classes.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.2=C\:\\Users\\spari\\Documents\\Techbrick\\bluerobot\\TeamCode\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\classes_0.dex
-base.1=C\:\\Users\\spari\\Documents\\Techbrick\\bluerobot\\TeamCode\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
-base.0=C\:\\Users\\spari\\Documents\\Techbrick\\bluerobot\\TeamCode\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.2=C\:\\Users\\spari\\Documents\\Techbrick\\red_robot\\TeamCode\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\classes_0.dex
+base.1=C\:\\Users\\spari\\Documents\\Techbrick\\red_robot\\TeamCode\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
+base.0=C\:\\Users\\spari\\Documents\\Techbrick\\red_robot\\TeamCode\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex

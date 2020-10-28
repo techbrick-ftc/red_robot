@@ -12,13 +12,13 @@
 12
 13    <uses-sdk
 14        android:minSdkVersion="23"
-14-->C:\Users\spari\Documents\Techbrick\bluerobot\TeamCode\src\main\AndroidManifest.xml
+14-->C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml
 15        android:targetSdkVersion="28" />
-15-->C:\Users\spari\Documents\Techbrick\bluerobot\TeamCode\src\main\AndroidManifest.xml
+15-->C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml
 16
 17    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-17-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-81
-17-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-78
+17-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-81
+17-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-78
 18    <uses-permission
 18-->[org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:11:5-13:35
 19        android:name="android.permission.ACCESS_WIFI_STATE"
@@ -142,94 +142,94 @@
 84-->[org.firstinspires.ftc:Inspection:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\897e84df2ae5460309033705772e6fc5\jetified-Inspection-6.0.1\AndroidManifest.xml:12:22-71
 85
 86    <application
-86-->C:\Users\spari\Documents\Techbrick\bluerobot\TeamCode\src\main\AndroidManifest.xml:11:5-19
+86-->C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml:11:5-19
 87        android:name="org.firstinspires.ftc.robotcore.internal.system.RobotApplication"
 87-->[org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:86:18-97
 88        android:allowBackup="true"
-88-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:9-35
+88-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:9-35
 89        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 89-->[androidx.core:core:1.3.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\429fb715fcc7711d4ab133e350b6f531\core-1.3.0\AndroidManifest.xml:24:18-86
 90        android:debuggable="true"
 91        android:extractNativeLibs="true"
-91-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-41
+91-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-41
 92        android:icon="@drawable/ic_launcher"
-92-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:9-45
+92-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:9-45
 93        android:label="@string/app_name"
-93-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-41
+93-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-41
 94        android:largeHeap="true"
-94-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:9-33
+94-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:9-33
 95        android:testOnly="true"
 96        android:theme="@style/AppThemeRedRC" > <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
-96-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:9-45
+96-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:9-45
 97        <meta-data
-97-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:9-25:33
+97-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:9-25:33
 98            android:name="org.firstinspires.latestSupportedControlHubVersion"
-98-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-78
+98-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-78
 99            android:value="1" /> <!-- The main robot controller activity -->
-99-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-30
+99-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:13-30
 100        <activity
-100-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:9-39:20
+100-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:28:9-39:20
 101            android:name="org.firstinspires.ftc.robotcontroller.internal.PermissionValidatorWrapper"
-101-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-101
+101-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:29:13-101
 102            android:configChanges="orientation|screenSize"
-102-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-59
+102-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:30:13-59
 103            android:label="@string/app_name"
-103-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-45
+103-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:31:13-45
 104            android:launchMode="singleTask"
-104-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:13-44
+104-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:32:13-44
 105            android:screenOrientation="fullUser" >
-105-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:13-49
+105-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:33:13-49
 106            <intent-filter>
-106-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-38:29
+106-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:34:13-38:29
 107                <category android:name="android.intent.category.LAUNCHER" />
-107-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:17-77
-107-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:27-74
+107-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:17-77
+107-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:35:27-74
 108
 109                <action android:name="android.intent.action.MAIN" />
-109-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:17-69
-109-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:25-66
+109-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:17-69
+109-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:37:25-66
 110            </intent-filter>
 111        </activity>
 112        <activity
-112-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:9-58:20
+112-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:40:9-58:20
 113            android:name="org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity"
-113-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-101
+113-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:41:13-101
 114            android:configChanges="orientation|screenSize"
-114-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-59
+114-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:42:13-59
 115            android:label="@string/app_name"
-115-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:13-45
+115-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:43:13-45
 116            android:launchMode="singleTask"
-116-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:13-44
+116-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:44:13-44
 117            android:screenOrientation="fullUser" >
-117-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:45:13-49
+117-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:45:13-49
 118            <intent-filter>
-118-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:46:13-48:29
+118-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:46:13-48:29
 119                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
-119-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:47:17-90
-119-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:47:25-87
+119-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:47:17-90
+119-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:47:25-87
 120            </intent-filter>
 121
 122            <meta-data
-122-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:50:13-52:57
+122-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:50:13-52:57
 123                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-123-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:51:17-79
+123-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:51:17-79
 124                android:resource="@xml/device_filter" />
-124-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:52:17-54
+124-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:52:17-54
 125
 126            <!-- org.firstinspires.main.entry indicates that this app is compatible with the Dragonboard Control Hub -->
 127            <meta-data
-127-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:55:13-57:40
+127-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:55:13-57:40
 128                android:name="org.firstinspires.main.entry"
-128-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:56:17-60
+128-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:56:17-60
 129                android:value="true" />
-129-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:57:17-37
+129-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:57:17-37
 130        </activity> <!-- The robot controller service in which most of the robot functionality is managed -->
 131        <service
-131-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:61:9-63:38
+131-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:61:9-63:38
 132            android:name="com.qualcomm.ftccommon.FtcRobotControllerService"
-132-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:62:13-76
+132-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:62:13-76
 133            android:enabled="true" />
-133-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\bluerobot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:63:13-35
+133-->[:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:63:13-35
 134        <!--
 135    Needed to support sending logs from log viewer on Nougat and later.
 136    Note: DON'T need to shift meta-data to 'androidx' from 'android.support.FILE_PROVIDER_PATHS'
