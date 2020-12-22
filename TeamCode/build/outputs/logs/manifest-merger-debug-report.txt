@@ -5,18 +5,20 @@ INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\And
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml:8:1-12:12
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml:8:1-12:12
 MERGED from [:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-66:12
+MERGED from [com.acmerobotics.dashboard:dashboard:0.3.10] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\799548ee3bc353b6e46ed37362b997a8\jetified-dashboard-0.3.10\AndroidManifest.xml:2:1-9:12
 MERGED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:2:1-130:12
 MERGED from [org.firstinspires.ftc:Hardware:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\1c2bb4cd9a47953818955c9c59042121\jetified-Hardware-6.0.1\AndroidManifest.xml:2:1-11:12
 MERGED from [org.firstinspires.ftc:FtcCommon:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\1af8e4560487e7249d99e5156a77e036\jetified-FtcCommon-6.0.1\AndroidManifest.xml:3:1-235:12
 MERGED from [:tfod-release:] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\5fab9b383ed9a29bd9ec24ccffc48ca0\jetified-tfod-release\AndroidManifest.xml:2:1-11:12
 MERGED from [:tensorflow-lite-0.0.0-nightly:] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\8de39f8baae639b9b1caa67458fd4c35\tensorflow-lite-0.0.0-nightly\AndroidManifest.xml:2:1-6:12
+MERGED from [com.spartronics4915.lib:ftc265:2.1.2] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\dae5b98c86302c35b10463c180a8410d\jetified-ftc265-2.1.2\AndroidManifest.xml:2:1-13:12
+MERGED from [com.arcrobotics:ftclib:1.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\27c6c0eeae6ef989a9e52f3763a66971\jetified-ftclib-1.0.1\AndroidManifest.xml:2:1-11:12
 MERGED from [org.openftc:easyopencv:1.4.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\8c96099381a85d25902f0a5a0be2c36b\jetified-easyopencv-1.4.1\AndroidManifest.xml:2:1-11:12
 MERGED from [org.firstinspires.ftc:Inspection:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\897e84df2ae5460309033705772e6fc5\jetified-Inspection-6.0.1\AndroidManifest.xml:2:1-32:12
 MERGED from [org.firstinspires.ftc:Blocks:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\c75f82e8242e557dc6ab4fb0ce44c893\jetified-Blocks-6.0.1\AndroidManifest.xml:2:1-26:12
 MERGED from [org.firstinspires.ftc:RobotServer:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\cff72f9ec5003fe674a4e984771c3d43\jetified-RobotServer-6.0.1\AndroidManifest.xml:2:1-11:12
 MERGED from [org.firstinspires.ftc:OnBotJava:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\5fd033806c529e56035eed6c54fff3ca\jetified-OnBotJava-6.0.1\AndroidManifest.xml:34:1-43:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\bf96d2b5a86ecd602a621e7e96856420\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
-MERGED from [org.openftc:opencv-repackaged:4.1.0-C] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4ca56832e41750fce91d30defb0292a3\jetified-opencv-repackaged-4.1.0-C\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\12c076570219bdc2a11e9d0df335391a\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\ee9b51f71825564f346013ea1d4d0318\jetified-appcompat-resources-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4c1ade53cc4b20d7bc631ac17d3bfca4\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -36,6 +38,8 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\spari\.gradle\ca
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\c6f1e76c078a7e4f5288325854cab247\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\7282e00d74c6a6acf53f4bfd68421266\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\73114719268a97e9fd391905563b2ee9\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [org.openftc:opencv-repackaged:4.1.0-C] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4ca56832e41750fce91d30defb0292a3\jetified-opencv-repackaged-4.1.0-C\AndroidManifest.xml:2:1-11:12
+MERGED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:2:1-28:12
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml:8:1-12:12
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml:8:1-12:12
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml:8:1-12:12
@@ -71,8 +75,12 @@ MERGED from [androidx.core:core:1.3.0] C:\Users\spari\.gradle\caches\transforms-
 MERGED from [androidx.core:core:1.3.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\429fb715fcc7711d4ab133e350b6f531\core-1.3.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\67aa86ef8808cac41aa5afe6d271f3ea\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\67aa86ef8808cac41aa5afe6d271f3ea\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+MERGED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:11:5-26:19
+MERGED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:11:5-26:19
 	android:extractNativeLibs
 		ADDED from [:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-41
+	android:supportsRtl
+		ADDED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:13:9-35
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.3.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\429fb715fcc7711d4ab133e350b6f531\core-1.3.0\AndroidManifest.xml:24:18-86
 	android:label
@@ -93,6 +101,8 @@ INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\And
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml
 MERGED from [:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-10:41
 MERGED from [:FtcRobotController] C:\Users\spari\Documents\Techbrick\red_robot\FtcRobotController\build\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-10:41
+MERGED from [com.acmerobotics.dashboard:dashboard:0.3.10] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\799548ee3bc353b6e46ed37362b997a8\jetified-dashboard-0.3.10\AndroidManifest.xml:5:5-7:41
+MERGED from [com.acmerobotics.dashboard:dashboard:0.3.10] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\799548ee3bc353b6e46ed37362b997a8\jetified-dashboard-0.3.10\AndroidManifest.xml:5:5-7:41
 MERGED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:7:5-9:41
 MERGED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:7:5-9:41
 MERGED from [org.firstinspires.ftc:Hardware:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\1c2bb4cd9a47953818955c9c59042121\jetified-Hardware-6.0.1\AndroidManifest.xml:7:5-9:41
@@ -101,6 +111,10 @@ MERGED from [org.firstinspires.ftc:FtcCommon:6.0.1] C:\Users\spari\.gradle\cache
 MERGED from [org.firstinspires.ftc:FtcCommon:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\1af8e4560487e7249d99e5156a77e036\jetified-FtcCommon-6.0.1\AndroidManifest.xml:8:5-10:41
 MERGED from [:tfod-release:] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\5fab9b383ed9a29bd9ec24ccffc48ca0\jetified-tfod-release\AndroidManifest.xml:7:5-9:41
 MERGED from [:tfod-release:] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\5fab9b383ed9a29bd9ec24ccffc48ca0\jetified-tfod-release\AndroidManifest.xml:7:5-9:41
+MERGED from [com.spartronics4915.lib:ftc265:2.1.2] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\dae5b98c86302c35b10463c180a8410d\jetified-ftc265-2.1.2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.spartronics4915.lib:ftc265:2.1.2] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\dae5b98c86302c35b10463c180a8410d\jetified-ftc265-2.1.2\AndroidManifest.xml:7:5-9:41
+MERGED from [com.arcrobotics:ftclib:1.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\27c6c0eeae6ef989a9e52f3763a66971\jetified-ftclib-1.0.1\AndroidManifest.xml:7:5-9:41
+MERGED from [com.arcrobotics:ftclib:1.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\27c6c0eeae6ef989a9e52f3763a66971\jetified-ftclib-1.0.1\AndroidManifest.xml:7:5-9:41
 MERGED from [org.openftc:easyopencv:1.4.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\8c96099381a85d25902f0a5a0be2c36b\jetified-easyopencv-1.4.1\AndroidManifest.xml:7:5-9:41
 MERGED from [org.openftc:easyopencv:1.4.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\8c96099381a85d25902f0a5a0be2c36b\jetified-easyopencv-1.4.1\AndroidManifest.xml:7:5-9:41
 MERGED from [org.firstinspires.ftc:Inspection:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\897e84df2ae5460309033705772e6fc5\jetified-Inspection-6.0.1\AndroidManifest.xml:7:5-9:41
@@ -113,8 +127,6 @@ MERGED from [org.firstinspires.ftc:OnBotJava:6.0.1] C:\Users\spari\.gradle\cache
 MERGED from [org.firstinspires.ftc:OnBotJava:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\5fd033806c529e56035eed6c54fff3ca\jetified-OnBotJava-6.0.1\AndroidManifest.xml:39:5-41:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\bf96d2b5a86ecd602a621e7e96856420\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\bf96d2b5a86ecd602a621e7e96856420\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
-MERGED from [org.openftc:opencv-repackaged:4.1.0-C] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4ca56832e41750fce91d30defb0292a3\jetified-opencv-repackaged-4.1.0-C\AndroidManifest.xml:7:5-9:41
-MERGED from [org.openftc:opencv-repackaged:4.1.0-C] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4ca56832e41750fce91d30defb0292a3\jetified-opencv-repackaged-4.1.0-C\AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\12c076570219bdc2a11e9d0df335391a\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\12c076570219bdc2a11e9d0df335391a\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\ee9b51f71825564f346013ea1d4d0318\jetified-appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
@@ -153,6 +165,10 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\spari\.g
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\7282e00d74c6a6acf53f4bfd68421266\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\73114719268a97e9fd391905563b2ee9\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\73114719268a97e9fd391905563b2ee9\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [org.openftc:opencv-repackaged:4.1.0-C] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4ca56832e41750fce91d30defb0292a3\jetified-opencv-repackaged-4.1.0-C\AndroidManifest.xml:7:5-9:41
+MERGED from [org.openftc:opencv-repackaged:4.1.0-C] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\4ca56832e41750fce91d30defb0292a3\jetified-opencv-repackaged-4.1.0-C\AndroidManifest.xml:7:5-9:41
+MERGED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:7:5-9:41
+MERGED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml
 INJECTED from C:\Users\spari\Documents\Techbrick\red_robot\TeamCode\src\main\AndroidManifest.xml
 	android:targetSdkVersion
@@ -321,6 +337,8 @@ ADDED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches
 		ADDED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:53:9-52
 uses-permission#android.permission.CAMERA
 ADDED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:55:5-65
+MERGED from [com.spartronics4915.lib:ftc265:2.1.2] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\dae5b98c86302c35b10463c180a8410d\jetified-ftc265-2.1.2\AndroidManifest.xml:11:5-65
+MERGED from [com.spartronics4915.lib:ftc265:2.1.2] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\dae5b98c86302c35b10463c180a8410d\jetified-ftc265-2.1.2\AndroidManifest.xml:11:5-65
 	android:name
 		ADDED from [org.firstinspires.ftc:RobotCore:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\0482513baccc32f6fbd2547409ec7d7a\jetified-RobotCore-6.0.1\AndroidManifest.xml:55:22-62
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
@@ -781,3 +799,11 @@ ADDED from [org.firstinspires.ftc:Blocks:6.0.1] C:\Users\spari\.gradle\caches\tr
 		ADDED from [org.firstinspires.ftc:Blocks:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\c75f82e8242e557dc6ab4fb0ce44c893\jetified-Blocks-6.0.1\AndroidManifest.xml:21:13-59
 	android:name
 		ADDED from [org.firstinspires.ftc:Blocks:6.0.1] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\c75f82e8242e557dc6ab4fb0ce44c893\jetified-Blocks-6.0.1\AndroidManifest.xml:20:13-93
+activity#com.intel.realsense.librealsense.DeviceWatcherActivity
+ADDED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:14:9-25:20
+	android:theme
+		ADDED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:17:13-59
+	android:directBootAware
+		ADDED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:16:13-43
+	android:name
+		ADDED from [com.intel.realsense:librealsense:2.34.0-ftc265] C:\Users\spari\.gradle\caches\transforms-2\files-2.1\15bffc86b01a6ae7289e62b7e76e5590\jetified-librealsense-2.34.0-ftc265\AndroidManifest.xml:15:13-82
