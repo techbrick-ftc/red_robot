@@ -1,8 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.arcrobotics:ftclib:1.0.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b538b4ff87a8624ce3e8be0c50407b10/jetified-ftclib-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b538b4ff87a8624ce3e8be0c50407b10/jetified-ftclib-1.0.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8da1b7d05316d544b273dcbd5d2aedc3/jetified-ftclib-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8da1b7d05316d544b273dcbd5d2aedc3/jetified-ftclib-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8da1b7d05316d544b273dcbd5d2aedc3/jetified-ftclib-1.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.arcrobotics/ftclib/1.0.1/eb2a64448ef590aa41bae197f7821824090ab6b4/ftclib-1.0.1-javadoc.jar!/" />

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -11,27 +13,37 @@ public class FieldCentric {
     // Variable setup, all will be explained within code
     private DcMotor[] motors;
     private double[] wheelAngles;
+    private double offset;
     private double r;
     private double theta;
-    private double currentAngle;
+    private double angle;
+    private double angle() { return imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.RADIANS).thirdAngle; }
     private BNO055IMU imu;
 
     private double[] wheelPowers;
 
-    public void setUp(DcMotor[] motors, double[] wheelAngles, BNO055IMU imu) throws Exception {
+    private FtcDashboard dashboard = FtcDashboard.getInstance();
+    private TelemetryPacket packet = new TelemetryPacket();
+
+    public void setUp(DcMotor[] motors, double[] wheelAngles, BNO055IMU imu) {
         // Check if we have angles for every motor, and vice versa
         if (motors.length != wheelAngles.length) {
-            throw new java.lang.Exception("Motor and wheelAngle arrays do not have same length.\nCheck your code!!!");
+            throw new RuntimeException("Motor and wheelAngle arrays do not have same length.\nCheck your code!!!");
         }
 
         this.motors = motors;
         this.wheelAngles = wheelAngles;
         this.wheelPowers = new double[motors.length];
         this.imu = imu;
+        this.offset = angle();
     }
 
-    private void getAngle() {
-        currentAngle = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.RADIANS).firstAngle;
+    public void resetAngle() {
+        this.offset = angle();
+    }
+
+    public void gyro(double angle) {
+        this.angle = angle;
     }
 
     /**
@@ -41,28 +53,27 @@ public class FieldCentric {
      * @param turn The input to control robot's turn
      */
     public void Drive(double x, double y, double turn) {
-        /*
-            Get the current angle
-         */
-        getAngle();
 
         /*
             Set r (for polar coords) to the distance of the point (x,y) from (0,0)
             (The speed)
          */
-        r = Math.sqrt((x*x)+(y*y));
+        r = Math.sqrt(x*x+y*y);
+        packet.put("r", r);
 
         /*
             Set theta (for polar coords) to the theta of the point (x,y) to the x-axis at the origin
             (The direction to go)
          */
         theta = Math.atan2(x, y);
+        packet.put("theta", theta);
 
         /*
             Add current angle to account for rotation (since we are getting the theta from a controller
             axis (-1.0 to 1.0) we don't know the angle we are currently at
          */
-        double newTheta = theta + currentAngle;
+        double newTheta = theta + this.angle;
+        packet.put("newTheta", newTheta);
 
         /*
             Get the angle of the wheel and subtract the newTheta (because newTheta is clockwise and
@@ -70,7 +81,8 @@ public class FieldCentric {
          */
         for (int i = 0; i < motors.length; i++) {
             motors[i].setPower(Math.sin(wheelAngles[i] - newTheta) * r + turn);
-            wheelPowers[i] = motors[i].getPower();
+            packet.put("Motor " + i, motors[i].getPower());
         }
+        dashboard.sendTelemetryPacket(packet);
     }
 }

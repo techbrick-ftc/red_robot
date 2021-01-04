@@ -10,8 +10,8 @@
       "apkData": {
         "type": "MAIN",
         "splits": [],
-        "versionCode": 38,
-        "versionName": "6.0",
+        "versionCode": 39,
+        "versionName": "6.1",
         "outputFile": "FtcRobotController-debug.aar",
         "fullName": "debug",
         "baseName": "debug",

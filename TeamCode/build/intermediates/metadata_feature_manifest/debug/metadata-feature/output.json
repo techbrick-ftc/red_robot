@@ -10,8 +10,8 @@
       "apkData": {
         "type": "MAIN",
         "splits": [],
-        "versionCode": 38,
-        "versionName": "6.0",
+        "versionCode": 39,
+        "versionName": "6.1",
         "outputFile": "TeamCode-debug.apk",
         "fullName": "debug",
         "baseName": "debug",

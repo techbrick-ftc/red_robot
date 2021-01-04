@@ -7,8 +7,6 @@ public final class BuildConfig {
   public static final boolean DEBUG = Boolean.parseBoolean("true");
   public static final String LIBRARY_PACKAGE_NAME = "com.qualcomm.ftcrobotcontroller";
   public static final String BUILD_TYPE = "debug";
-  public static final int VERSION_CODE = 38;
-  public static final String VERSION_NAME = "6.0";
-  // Fields from default config.
-  public static final String BUILD_TIME = "2020-12-08T19:36:10.999-0500";
+  // Field from default config.
+  public static final String BUILD_TIME = "2021-01-03T13:44:28.641-0500";
 }

@@ -8,8 +8,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qualcomm.ftcrobotcontroller"
     android:targetSandboxVersion="2"
-    android:versionCode="38"
-    android:versionName="6.0" >
+    android:versionCode="39"
+    android:versionName="6.1" >
 
     <uses-sdk
         android:minSdkVersion="25"
@@ -95,7 +95,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppThemeRedRC" > <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
+        android:theme="@style/AppThemeRedRC"
+        android:usesCleartextTraffic="true" > <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
         <meta-data
             android:name="org.firstinspires.latestSupportedControlHubVersion"
             android:value="1" /> <!-- The main robot controller activity -->

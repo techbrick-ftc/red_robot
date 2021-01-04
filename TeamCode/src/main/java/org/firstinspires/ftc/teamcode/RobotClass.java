@@ -1,20 +1,34 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name="Robo Test Class", group="Test")
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+
+import static java.lang.Math.PI;
+
+@TeleOp(name="Robo Drive Class", group="Test")
 public class RobotClass extends LinearOpMode {
     DcMotor flMotor;
     DcMotor frMotor;
     DcMotor rlMotor;
     DcMotor rrMotor;
 
-    CRServo intakeLeft;
-    CRServo intakeRight;
+    BNO055IMU imu;
+
+    DcMotor intake;
+
+    FieldCentric drive = new FieldCentric();
+
+    FtcDashboard dashboard = FtcDashboard.getInstance();
+    TelemetryPacket packet = new TelemetryPacket();
 
     public void runOpMode() {
         flMotor = hardwareMap.get(DcMotor.class, "flMotor");
@@ -22,34 +36,34 @@ public class RobotClass extends LinearOpMode {
         rlMotor = hardwareMap.get(DcMotor.class, "rlMotor");
         rrMotor = hardwareMap.get(DcMotor.class, "rrMotor");
 
-        flMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        rlMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rlMotor.setDirection(DcMotor.Direction.REVERSE);
+        rrMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        intakeLeft = hardwareMap.get(CRServo.class, "intakeLeft");
-        intakeRight = hardwareMap.get(CRServo.class, "intakeRight");
+        intake = hardwareMap.get(DcMotor.class, "intake");
 
-        intakeLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters params = new BNO055IMU.Parameters();
+        params.angleUnit            = BNO055IMU.AngleUnit.RADIANS;
+        params.accelUnit            = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        params.calibrationDataFile  = "BNO055IMUCalibration.json";
+        params.loggingEnabled       = true;
+        params.loggingTag           = "IMU";
+        params.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        imu.initialize(params);
+
+        DcMotor[] motors = {frMotor, rrMotor, rlMotor, flMotor};
+        double[] motorAngles = {PI/4, 3*PI/4, 5*PI/4, 7*PI/4};
+
+        drive.setUp(motors, motorAngles, imu);
 
         waitForStart();
 
         while (opModeIsActive() && !isStopRequested()) {
-            double fbDrive = gamepad1.left_stick_y;
-            double lrDrive = gamepad1.left_stick_x;
-            double trDrive = gamepad1.right_stick_x;
-
-            double flPower = fbDrive + lrDrive + trDrive;
-            double frPower = fbDrive + lrDrive - trDrive;
-            double rlPower = fbDrive - lrDrive + trDrive;
-            double rrPower = fbDrive - lrDrive - trDrive;
-
-            flMotor.setPower(flPower);
-            frMotor.setPower(frPower);
-            rlMotor.setPower(rlPower);
-            rrMotor.setPower(rrPower);
+            drive.gyro(imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.RADIANS).thirdAngle);
+            drive.Drive(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
             double intakeSpeed = gamepad1.right_trigger - gamepad1.left_trigger;
-            intakeLeft.setPower(intakeSpeed);
-            intakeRight.setPower(intakeSpeed);
+            intake.setPower(intakeSpeed);
         }
     }
 }

@@ -1,8 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.intel.realsense:librealsense:2.34.0-ftc265@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9affcd503d3db308bf106b3ed88c91cf/jetified-librealsense-2.34.0-ftc265/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9affcd503d3db308bf106b3ed88c91cf/jetified-librealsense-2.34.0-ftc265/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e1a977ce313bec2b37d6d085bd4074f/jetified-librealsense-2.34.0-ftc265/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e1a977ce313bec2b37d6d085bd4074f/jetified-librealsense-2.34.0-ftc265/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e1a977ce313bec2b37d6d085bd4074f/jetified-librealsense-2.34.0-ftc265/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
