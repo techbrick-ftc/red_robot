@@ -20,11 +20,12 @@ public class RPMMeasure extends LinearOpMode {
 
     // NOT THESE
     private DcMotor driveMotor;
-    private final List<Double> rotSpeeds = new ArrayList<>();
+    private final List<Double> rotSpeeds = new ArrayList<>(sampleSize);
 
     public void runOpMode() {
         int tickOffset;
         int tickDelta;
+        int rotations = 0;
         double spr;
         double rps;
         double rpm;
@@ -43,11 +44,11 @@ public class RPMMeasure extends LinearOpMode {
         while(opModeIsActive() && !isStopRequested()) {
             tickDelta = driveMotor.getCurrentPosition() - tickOffset;
             if (tickDelta >= ticksPerRotation) {
-                if (rotSpeeds.size() >= sampleSize) {
-                    rotSpeeds.clear();
+                if (rotations >= sampleSize) {
+                    rotations = 0;
                 }
 
-                rotSpeeds.add(et.seconds());
+                rotSpeeds.add(rotations, et.seconds());
                 spr = rotSpeeds.stream().mapToDouble(c -> c).sum() / rotSpeeds.size();
                 rps = 1 / spr;
                 rpm = rps * 60;
@@ -56,6 +57,7 @@ public class RPMMeasure extends LinearOpMode {
                 telemetry.update();
                 et.reset();
                 tickOffset = driveMotor.getCurrentPosition();
+                rotations++;
             }
         }
     }

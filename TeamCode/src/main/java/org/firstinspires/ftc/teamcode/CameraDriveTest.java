@@ -7,6 +7,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.spartronics4915.lib.T265Camera;
 
@@ -48,7 +49,7 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
         packet.addLine("IMU Done");
         dashboard.sendTelemetryPacket(packet);
 
-        DcMotor[] motors = {fl, rl, rr, fr};
+        DcMotor[] motors = {fr, rr, rl, fl};
         double[] angles = {PI/4, 3*PI/4, 5*PI/4, 7*PI/4};
 
         drive.setUp(motors, angles, camera, imu, telemetry);
