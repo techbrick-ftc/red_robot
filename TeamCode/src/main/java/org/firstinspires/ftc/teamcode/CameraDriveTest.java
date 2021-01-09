@@ -11,6 +11,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.spartronics4915.lib.T265Camera;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+
 import java.lang.annotation.ElementType;
 
 import static java.lang.Math.PI;
@@ -60,11 +62,7 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
 
         if (opModeIsActive()) {
             camera.start();
-            drive.goToPosition(36, 0, this);
-            sleep(1000);
-            drive.goToRotation(PI, this);
-            sleep(1000);
-            drive.goTo(0, 0, 0, 1, this);
+            drive.goToPosition(0, 36, 0.5, this);
             camera.stop();
         }
 

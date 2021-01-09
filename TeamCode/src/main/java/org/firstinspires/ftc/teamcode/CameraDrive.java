@@ -30,7 +30,7 @@ public class CameraDrive {
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
     private final TelemetryPacket packet = new TelemetryPacket();
 
-    private Orientation gangles() { return imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS); }
+    private Orientation gangles() { return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.RADIANS); }
     private Telemetry telemetry;
 
     private boolean driving;
@@ -127,7 +127,7 @@ public class CameraDrive {
                 this.motors[i].setPower(scale ? this.motorSpeeds[i] * scaleFactor : this.motorSpeeds[i]);
             }
 
-            writeTelemetry(scaleFactor, scale);
+            writeTelemetry(deltaX, deltaY, driveTheta);
         }
     }
 
@@ -162,16 +162,15 @@ public class CameraDrive {
         return output;
     }
 
-    private void writeTelemetry(double scaleFactor, boolean scale) {
+    private void writeTelemetry(double deltaX, double deltaY, double driveTheta) {
         if (telemetry == null) { return; }
-        packet.put("FR Before Speed", motorSpeeds[0]);
-        packet.put("RR Before Speed", motorSpeeds[1]);
-        packet.put("RL Before Speed", motorSpeeds[2]);
-        packet.put("FL Before Speed", motorSpeeds[3]);
-        packet.put("Driving", driving);
-        packet.put("Turning", turning);
-        packet.put("Scale Factor", scaleFactor);
-        packet.put("Scale", scale);
+        packet.put("FR Speed", motors[0].getPower());
+        packet.put("RR Speed", motors[1].getPower());
+        packet.put("RL Speed", motors[2].getPower());
+        packet.put("FL Speed", motors[3].getPower());
+        packet.put("Delta X", deltaX);
+        packet.put("Delta Y", deltaY);
+        packet.put("Drive Theta", driveTheta);
         dashboard.sendTelemetryPacket(packet);
     }
 }
