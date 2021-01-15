@@ -176,7 +176,3 @@ public class CameraDrive {
         dashboard.sendTelemetryPacket(packet);
     }
 }
-
-interface TeleAuto {
-    boolean opModeIsActive();
-}
