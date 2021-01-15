@@ -19,7 +19,7 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
     DcMotor rr = null;
     BNO055IMU imu = null;
     T265Camera camera = null;
-    CameraDrive drive = new CameraDrive();
+    CameraMain drive = new CameraMain();
     FtcDashboard dashboard = null;
     TelemetryPacket packet = null;
 

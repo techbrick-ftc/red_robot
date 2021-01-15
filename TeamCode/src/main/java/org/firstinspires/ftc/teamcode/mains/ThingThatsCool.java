@@ -18,7 +18,7 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
     private BNO055IMU imu;
     private T265Camera camera;
 
-    private final CameraDrive drive = new CameraDrive();
+    private final CameraMain drive = new CameraMain();
     private final FieldCentric centric = new FieldCentric();
 
     private final Translation2d posA = new Translation2d(0, 30);
