@@ -169,9 +169,5 @@ public class EasyOpenCVImportable {
 
         public int getAnalysis() { return avg1; }
     }
-
-    enum CameraType {
-        PHONE,
-        WEBCAM
-    }
 }
+
