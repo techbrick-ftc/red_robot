@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.spartronics4915.lib.T265Camera;
 
-import org.firstinspires.ftc.teamcode.mains.FieldCentric;
+import org.firstinspires.ftc.teamcode.libraries.FieldCentric;
 
 import static java.lang.Math.PI;
 

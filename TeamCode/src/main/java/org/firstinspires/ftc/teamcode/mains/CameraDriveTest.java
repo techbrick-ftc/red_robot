@@ -9,6 +9,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.spartronics4915.lib.T265Camera;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.teamcode.libraries.CameraAuto;
+
 import static java.lang.Math.PI;
 
 @TeleOp(name="Camera Drive", group="drive")
@@ -19,7 +22,7 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
     DcMotor rr = null;
     BNO055IMU imu = null;
     T265Camera camera = null;
-    CameraMain drive = new CameraMain();
+    CameraAuto drive = new CameraAuto();
     FtcDashboard dashboard = null;
     TelemetryPacket packet = null;
 
@@ -48,7 +51,7 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
         DcMotor[] motors = {fr, rr, rl, fl};
         double[] angles = {PI/4, 3*PI/4, 5*PI/4, 7*PI/4};
 
-        drive.setUp(motors, angles, camera, imu, telemetry);
+        drive.setUp(motors, angles, camera, imu, AxesReference.EXTRINSIC);
         packet.addLine("Set Up Done");
         dashboard.sendTelemetryPacket(packet);
 
