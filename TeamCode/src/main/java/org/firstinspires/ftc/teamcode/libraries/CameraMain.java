@@ -4,8 +4,9 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.spartronics4915.lib.T265Camera;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.spartronics4915.lib.T265Camera;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -17,7 +18,6 @@ import java.util.OptionalDouble;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
-import static java.lang.Math.max;
 
 public class CameraMain {
     private DcMotor[] motors;
@@ -51,7 +51,7 @@ public class CameraMain {
         this.telemetry = telemetry;
     }
 
-    public void goToInternal(double moveX, double moveY, double theta, double speed) {
+    public boolean goToInternal(double moveX, double moveY, double theta, double speed) {
         // Wrap theta to localTheta
         double localTheta = wrap(theta);
         T265Camera.CameraUpdate up = camera.getLastReceivedCameraUpdate();
@@ -72,7 +72,7 @@ public class CameraMain {
 
         if (xComplete && yComplete && turnComplete) {
             stopWheel();
-            return;
+            return true;
         }
 
         double driveTheta = Math.atan2(yComplete ? 0 : -deltaY, xComplete ? 0 : deltaX);
@@ -101,6 +101,8 @@ public class CameraMain {
         }
 
         writeTelemetry(deltaX, deltaY, driveTheta);
+
+        return false;
     }
 
     public Orientation getRotation() {

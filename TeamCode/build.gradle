@@ -16,7 +16,7 @@ apply from: '../build.common.gradle'
 
 repositories {
     maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
-    jcenter();
+    jcenter()
     maven { url "https://maven.0x778.tk" }
 }
 

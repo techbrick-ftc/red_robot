@@ -7,11 +7,11 @@ import com.spartronics4915.lib.T265Camera;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.teamcode.mains.TeleAuto;
-import org.jetbrains.annotations.NotNull;
 
-public class CameraAuto {
+public class CameraTele {
     private final CameraMain MAIN = new CameraMain();
+
+    private boolean complete = false;
 
     /**
      * Sets up internal variables for driving
@@ -38,37 +38,57 @@ public class CameraAuto {
         this.MAIN.setUpInternal(motors, angles, camera, imu, axesReference, telemetry);
     }
 
-    public void goToPosition(double moveX, double moveY, TeleAuto callback) {
-        goToPosition(moveX, moveY, 1, callback);
+    public void goToRotation(double theta) {
+        goToRotation(theta, 1);
     }
 
-    public void goToPosition(double moveX, double moveY, double speed, @NotNull TeleAuto callback) {
+    public void goToRotation(double theta, double speed) {
+        Translation2d currentPos = this.MAIN.getPosition();
+        double currentX = currentPos.getX();
+        double currentY = currentPos.getY();
+        complete = this.MAIN.goToInternal(currentX, currentY, theta, speed);
+    }
+
+    public void goToPositionX (double moveX) {
+        goToPositionX(moveX, 1);
+    }
+
+    public void goToPositionX (double moveX, double speed) {
+        Translation2d currentPos = this.MAIN.getPosition();
+        goToPosition(moveX, currentPos.getY(), speed);
+    }
+
+    public void goToPositionY (double moveY) {
+        goToPositionY(moveY, 1);
+    }
+
+    public void goToPositionY (double moveY, double speed) {
+        Translation2d currentPos = this.MAIN.getPosition();
+        goToPosition(currentPos.getX(), moveY, speed);
+    }
+
+    public void goToPosition(double moveX, double moveY) {
+        goToPosition(moveX, moveY, 1);
+    }
+
+    public void goToPosition(double moveX, double moveY, double speed) {
         double angle = this.MAIN.getRotation().firstAngle;
-        while (callback.opModeIsActive()) {
-            this.MAIN.goToInternal(moveX, moveY, angle, speed);
-        }
+        complete = this.MAIN.goToInternal(moveX, moveY, angle, speed);
     }
 
-    public void goToRotation(double theta, TeleAuto callback) {
-        goToRotation(theta, 1, callback);
+    public void goTo(double moveX, double moveY, double theta) {
+        complete = this.MAIN.goToInternal(moveX, moveY, theta, 1);
     }
 
-    public void goToRotation(double theta, double speed, @NotNull TeleAuto callback) {
-        Translation2d current = this.MAIN.getPosition();
-        double currentX = current.getX();
-        double currentY = current.getY();
-        while (callback.opModeIsActive()) {
-            this.MAIN.goToInternal(currentX, currentY, theta, speed);
-        }
+    public void goTo(double moveX, double moveY, double theta, double speed) {
+        complete = this.MAIN.goToInternal(moveX, moveY, theta, speed);
     }
 
-    public void goTo(double moveX, double moveY, double theta, TeleAuto callback) {
-        goTo(moveX, moveY, theta, 1, callback);
+    public void newDrive() {
+        complete = false;
     }
 
-    public void goTo(double moveX, double moveY, double theta, double speed, @NotNull TeleAuto callback) {
-        while (callback.opModeIsActive()) {
-            this.MAIN.goToInternal(moveX, moveY, theta, speed);
-        }
+    public boolean complete() {
+        return complete;
     }
 }
