@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.mains;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.spartronics4915.lib.T265Camera;
 
@@ -33,7 +34,13 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
     private DcMotor intake;
     private DcMotor shooter;
     private Servo pusher;
-    private boolean shooterOn;
+    private boolean shooterOn = false;
+    private boolean shooterWait = false;
+    private boolean pusherWait = false;
+
+    private boolean a1Wait = false;
+    private boolean b1Wait = false;
+    private boolean x1Wait = false;
 
 
     private BNO055IMU imu;
@@ -47,6 +54,9 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
 
     ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     ScheduledFuture<?> pushEvent = null;
+
+    private final FtcDashboard dashboard = FtcDashboard.getInstance();
+    private final TelemetryPacket packet = new TelemetryPacket();
 
     public void runOpMode() {
         fl = hardwareMap.get(DcMotor.class, "fl");
@@ -90,10 +100,9 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
 
         waitForStart();
 
-        pusher.setPosition(-1);
+        pusher.setPosition(1);
+        if (!camera.isStarted()) { camera.start(); }
 
-        Gamepad prev1 = gamepad1;
-        Gamepad prev2 = gamepad2;
         while (opModeIsActive()) {
             if (gamepad1.left_stick_x > 0.2     ||
                 gamepad1.right_stick_x > 0.2    ||
@@ -102,7 +111,7 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
                 driving = turning = false;
             }
 
-            if (isMultiPart) {
+            if (isMultiPart && multiPart > 2) {
                 if (!drive.complete()) {
                     if ((multiType ^ multiPart) != 0) {
                         drive.goToPositionY(movingY);
@@ -110,10 +119,8 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
                         drive.goToPositionX(movingX);
                     }
                 } else {
-                    if (multiPart == 1) {
-                        isMultiPart = false;
-                    } else {
-                        multiPart += 1;
+                    if (multiPart > 2) {
+                        multiPart++;
                         drive.newDrive();
                     }
                 }
@@ -146,49 +153,65 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
                 isMultiPart = false;
             }
 
-            if (gamepad1.a && !prev1.a) {
-                movingX = 0;
-                movingY = 20;
+            if (gamepad1.a && !a1Wait) {
+                movingX = posA.getX();
+                movingY = posA.getY();
                 driving = true;
                 turning = false;
+                a1Wait = true;
                 drive.newDrive();
+            } else {
+                a1Wait = false;
             }
 
-            if (gamepad1.b && !prev1.b) {
-                movingX = -20;
-                movingY = 20;
+            if (gamepad1.b && !b1Wait) {
+                movingX = posB.getX();
+                movingY = posB.getY();
                 driving = true;
                 turning = false;
+                b1Wait = true;
                 drive.newDrive();
+            } else {
+                b1Wait = false;
             }
 
-            if (gamepad1.x && !prev1.x) {
+            if (gamepad1.x && !x1Wait) {
                 movingTheta = PI/2;
                 turning = true;
                 driving = false;
+                x1Wait = true;
                 drive.newDrive();
+            } else {
+                x1Wait = false;
             }
 
-            if (gamepad2.b && !prev2.b) {
+            if (gamepad2.b && !shooterWait) {
                 if (!shooterOn) {
                     shooter.setPower(1);
+                    shooterOn = true;
                 } else {
                     shooter.setPower(0);
+                    shooterOn = false;
                 }
+                shooterWait = true;
+            } else if (!gamepad2.b) {
+                shooterWait = false;
             }
 
-            if (gamepad2.a && !prev2.b && pushEvent.isDone()) {
-                pusher.setPosition(1);
+            telemetry.addData("Gamepad 2 B", gamepad2.b);
+            telemetry.addData("Shooter Wait", shooterWait);
+            telemetry.update();
+
+            if (gamepad2.a && !pusherWait && pushEvent.isDone()) {
+                pusher.setPosition(0);
+                pusherWait = true;
                 schedulePusher();
+            } else {
+                pusherWait = false;
             }
 
             double intakePower = gamepad1.right_trigger - gamepad1.left_trigger;
             intake.setPower(intakePower);
-
-            try {
-                prev1.copy(gamepad1);
-                prev2.copy(gamepad2);
-            } catch (Exception ignore) {}
         }
     }
 
@@ -197,8 +220,6 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
     }
 
     private void schedulePusher() {
-        pushEvent = executorService.schedule(() -> {
-            pusher.setPosition(0);
-        }, 500, TimeUnit.MILLISECONDS);
+        pushEvent = executorService.schedule(() -> pusher.setPosition(1), 1000, TimeUnit.MILLISECONDS);
     }
 }
