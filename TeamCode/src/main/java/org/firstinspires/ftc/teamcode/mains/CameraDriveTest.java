@@ -37,6 +37,10 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
         fr = hardwareMap.get(DcMotor.class, "fr");
         rl = hardwareMap.get(DcMotor.class, "rl");
         rr = hardwareMap.get(DcMotor.class, "rr");
+
+        rl.setDirection(DcMotor.Direction.REVERSE);
+        rr.setDirection(DcMotor.Direction.REVERSE);
+
         packet.addLine("Hardware Done");
         dashboard.sendTelemetryPacket(packet);
 
@@ -51,15 +55,17 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
         DcMotor[] motors = {fr, rr, rl, fl};
         double[] angles = {PI/4, 3*PI/4, 5*PI/4, 7*PI/4};
 
-        drive.setUp(motors, angles, camera, imu, AxesReference.EXTRINSIC);
+        drive.setUp(motors, angles, camera, imu, AxesReference.EXTRINSIC, telemetry);
         packet.addLine("Set Up Done");
         dashboard.sendTelemetryPacket(packet);
 
         waitForStart();
 
         if (opModeIsActive()) {
-            camera.start();
-            drive.goToPosition(0, 36, 0.5, this);
+            if (!camera.isStarted()) { camera.start(); }
+            drive.goToPosition(36, 0, 0.5, this);
+            drive.goToRotation(PI, this);
+            drive.goTo(0, 10, 3*PI/2, this);
             camera.stop();
         }
 
