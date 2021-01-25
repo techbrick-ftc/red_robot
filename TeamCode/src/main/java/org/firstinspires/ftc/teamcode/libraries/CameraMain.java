@@ -66,8 +66,8 @@ public class CameraMain {
         double deltaY = moveY - currentY;
         double deltaTheta = wrap(localTheta - currentTheta);
 
-        xComplete = abs(deltaX) < 0.2;
-        yComplete = abs(deltaY) < 0.2;
+        xComplete = abs(deltaX) < 0.3;
+        yComplete = abs(deltaY) < 0.3;
         turnComplete = abs(deltaTheta) < 0.2;
 
         if (xComplete && yComplete && turnComplete) {

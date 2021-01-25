@@ -44,9 +44,8 @@ public class CameraAuto {
 
     public void goToPosition(double moveX, double moveY, double speed, @NotNull TeleAuto callback) {
         double angle = this.MAIN.getRotation().firstAngle;
-        while (callback.opModeIsActive()) {
-            this.MAIN.goToInternal(moveX, moveY, angle, speed);
-        }
+
+        goTo(moveX, moveY, angle, speed, callback);
     }
 
     public void goToRotation(double theta, TeleAuto callback) {
@@ -57,9 +56,8 @@ public class CameraAuto {
         Translation2d current = this.MAIN.getPosition();
         double currentX = current.getX();
         double currentY = current.getY();
-        while (callback.opModeIsActive()) {
-            this.MAIN.goToInternal(currentX, currentY, theta, speed);
-        }
+
+        goTo(currentX, currentY, theta, speed, callback);
     }
 
     public void goTo(double moveX, double moveY, double theta, TeleAuto callback) {
@@ -67,8 +65,10 @@ public class CameraAuto {
     }
 
     public void goTo(double moveX, double moveY, double theta, double speed, @NotNull TeleAuto callback) {
+        boolean complete;
         while (callback.opModeIsActive()) {
-            this.MAIN.goToInternal(moveX, moveY, theta, speed);
+            complete = this.MAIN.goToInternal(moveX, moveY, theta, speed);
+            if (complete) { return; }
         }
     }
 }
