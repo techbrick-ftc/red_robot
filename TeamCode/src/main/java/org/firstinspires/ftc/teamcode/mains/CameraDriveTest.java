@@ -4,8 +4,8 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.spartronics4915.lib.T265Camera;
 
@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.libraries.CameraAuto;
 
 import static java.lang.Math.PI;
 
-@TeleOp(name="Camera Drive", group="drive")
+@Autonomous(name="Camera Drive", group="drive")
 public class CameraDriveTest extends LinearOpMode implements TeleAuto {
     DcMotor fl = null;
     DcMotor fr = null;
@@ -62,11 +62,14 @@ public class CameraDriveTest extends LinearOpMode implements TeleAuto {
         waitForStart();
 
         if (opModeIsActive()) {
-            if (!camera.isStarted()) { camera.start(); }
+            camera.start();
             drive.goToPosition(36, 0, 0.5, this);
             drive.goToRotation(PI, this);
             drive.goTo(0, 10, 3*PI/2, this);
             camera.stop();
+            telemetry.addLine("Stopped Camera");
+            telemetry.update();
+            sleep(5000);
         }
 
         if (isStopRequested()) {

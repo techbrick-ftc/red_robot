@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.mains;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -78,7 +77,7 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
         imu.initialize(params);
 
         if (camera == null) {
-            camera = new T265Camera(new Transform2d(), 0.1, hardwareMap.appContext);
+            //camera = new T265Camera(new Transform2d(), 0.1, hardwareMap.appContext);
         }
 
         final DcMotor[] motors = {fr, rr, rl, fl};
@@ -101,7 +100,7 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
         waitForStart();
 
         pusher.setPosition(1);
-        if (!camera.isStarted()) { camera.start(); }
+        //camera.start();
 
         while (opModeIsActive()) {
             if (gamepad1.left_stick_x > 0.2     ||
@@ -183,6 +182,10 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
                 drive.newDrive();
             } else {
                 x1Wait = false;
+            }
+
+            if (gamepad1.back) {
+                centric.resetAngle();
             }
 
             if (gamepad2.b && !shooterWait) {
