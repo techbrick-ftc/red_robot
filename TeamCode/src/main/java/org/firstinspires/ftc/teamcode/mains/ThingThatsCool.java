@@ -37,6 +37,10 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
     private boolean shooterWait = false;
     private boolean pusherWait = false;
 
+    private DcMotor wobbleMotor;
+    private Servo wobbleServo;
+    private double wobblePosition = -0.8;
+
     private boolean a1Wait = false;
     private boolean b1Wait = false;
     private boolean x1Wait = false;
@@ -53,6 +57,7 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
 
     ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     ScheduledFuture<?> pushEvent = null;
+    ScheduledFuture<?> wobbleEvent = null;
 
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
     private final TelemetryPacket packet = new TelemetryPacket();
@@ -67,8 +72,13 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
         shooter = hardwareMap.get(DcMotor.class, "shooter");
         pusher = hardwareMap.get(Servo.class, "pusher");
 
+        wobbleMotor = hardwareMap.get(DcMotor.class, "wobbleMotor");
+        wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
+
         rl.setDirection(DcMotor.Direction.REVERSE);
         rr.setDirection(DcMotor.Direction.REVERSE);
+
+        wobbleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();
@@ -190,7 +200,7 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
 
             if (gamepad2.b && !shooterWait) {
                 if (!shooterOn) {
-                    shooter.setPower(1);
+                    shooter.setPower(0.8);
                     shooterOn = true;
                 } else {
                     shooter.setPower(0);
@@ -206,12 +216,20 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
             telemetry.update();
 
             if (gamepad2.a && !pusherWait && pushEvent.isDone()) {
-                pusher.setPosition(0);
+                pusher.setPosition(0.1);
                 pusherWait = true;
                 schedulePusher();
             } else {
                 pusherWait = false;
             }
+
+            wobbleMotor.setPower(gamepad2.left_stick_x);
+
+            if ((gamepad2.right_stick_x > 0.1 || gamepad2.right_stick_x < -0.1) && wobbleEvent.isDone()) {
+                wobblePosition += gamepad2.right_stick_x / 10;
+                wobbleEvent = executorService.schedule(() -> {}, 100, TimeUnit.MILLISECONDS);
+            }
+            wobbleServo.setPosition(wobblePosition);
 
             double intakePower = gamepad1.right_trigger - gamepad1.left_trigger;
             intake.setPower(intakePower);
@@ -220,9 +238,10 @@ public class ThingThatsCool extends LinearOpMode implements TeleAuto {
 
     private void startScheduler() {
         pushEvent = executorService.schedule(() -> {}, 0, TimeUnit.MILLISECONDS);
+        wobbleEvent = executorService.schedule(() -> {}, 0, TimeUnit.MILLISECONDS);
     }
 
     private void schedulePusher() {
-        pushEvent = executorService.schedule(() -> pusher.setPosition(1), 1000, TimeUnit.MILLISECONDS);
+        pushEvent = executorService.schedule(() -> pusher.setPosition(0.9), 1000, TimeUnit.MILLISECONDS);
     }
 }

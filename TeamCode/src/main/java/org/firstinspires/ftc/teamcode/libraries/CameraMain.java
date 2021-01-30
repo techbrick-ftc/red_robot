@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.libraries;
 
 import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -23,12 +25,14 @@ public class CameraMain {
     private DcMotor[] motors;
     private double[] motorSpeeds;
     private double[] angles;
-    private T265Camera camera;
+    private T265Camera camera = null;
     private Translation2d translation2d;
     private BNO055IMU imu;
     private AxesReference axesReference;
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
     private final TelemetryPacket packet = new TelemetryPacket();
+    private final Canvas field = packet.fieldOverlay();
+    private final double maxSpeed = 0.8;
 
     private Orientation gangles() { return imu.getAngularOrientation(axesReference, AxesOrder.ZYX, AngleUnit.RADIANS); }
     private Telemetry telemetry;
@@ -55,6 +59,9 @@ public class CameraMain {
         // Wrap theta to localTheta
         double localTheta = wrap(theta);
         T265Camera.CameraUpdate up = camera.getLastReceivedCameraUpdate();
+        if (up.confidence == T265Camera.PoseConfidence.Failed) { telemetry.addLine("Failed"); telemetry.update(); return false; }
+        telemetry.addLine("Camera Working");
+        telemetry.update();
 
         this.translation2d = up.pose.getTranslation();
 
@@ -94,13 +101,29 @@ public class CameraMain {
 
         OptionalDouble optionalSpeed = Arrays.stream(motorSpeeds).max();
         double fastestSpeed = optionalSpeed.isPresent() ? optionalSpeed.getAsDouble() : 0;
-        boolean scale = fastestSpeed > 1;
-        double scaleFactor = 1 / fastestSpeed;
+        boolean scale = fastestSpeed > maxSpeed;
+        double scaleFactor = maxSpeed / fastestSpeed;
         for (int i = 0; i < this.motors.length; i++) {
             this.motors[i].setPower(scale ? this.motorSpeeds[i] * scaleFactor : this.motorSpeeds[i]);
         }
 
-        writeTelemetry(deltaX, deltaY, driveTheta);
+        //writeTelemetry(deltaX, deltaY, driveTheta);
+
+        final int robotRadius = 9;
+        Translation2d translation = new Translation2d(up.pose.getTranslation().getX() / 0.0254, up.pose.getTranslation().getY() / 0.0254);
+        Rotation2d rotation = up.pose.getRotation();
+
+        field.strokeCircle(translation.getX(), translation.getY(), robotRadius);
+        double arrowX = rotation.getCos() * robotRadius, arrowY = rotation.getSin() * robotRadius;
+        double x1 = translation.getX() + arrowX  / 2, y1 = translation.getY() + arrowY / 2;
+        double x2 = translation.getX() + arrowX, y2 = translation.getY() + arrowY;
+        field.strokeLine(x1, y1, x2, y2);
+
+        packet.put("X", translation.getX());
+        packet.put("Y", translation.getY());
+        packet.put("Confidence", up.confidence);
+
+        dashboard.sendTelemetryPacket(packet);
 
         return false;
     }

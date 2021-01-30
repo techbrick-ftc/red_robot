@@ -72,7 +72,7 @@ public class FieldCentric {
             Add current angle to account for rotation (since we are getting the theta from a controller
             axis (-1.0 to 1.0) we don't know the angle we are currently at
          */
-        double newTheta = theta + this.angle;
+        double newTheta = theta + this.angle - this.offset;
         packet.put("newTheta", newTheta);
 
         /*

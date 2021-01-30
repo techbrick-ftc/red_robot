@@ -16,15 +16,15 @@ apply from: '../build.common.gradle'
 
 repositories {
     maven { url = "https://dl.bintray.com/first-tech-challenge/ftcsdk/" }
-    jcenter()
-    maven { url "https://maven.0x778.tk" }
+    //jcenter()
+    maven { url = "https://maven.0x778.tk" }
 }
 
 dependencies {
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
     implementation 'org.jetbrains:annotations:15.0'
     implementation "org.openftc:easyopencv:1.4.1"
-    implementation "com.spartronics4915.lib:ftc265:2.1.5"
+    //implementation "com.spartronics4915.lib:ftc265:2.1.7"
     //implementation fileTree(dir: '/home/sparib/Documents/ftc265/build/classes/artifacts/T265', include: ['*.aar', '*.jar'], exclude: [])
     //implementation 'com.arcrobotics:ftclib:1.1.6'
 }

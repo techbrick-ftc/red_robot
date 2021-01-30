@@ -6,4 +6,5 @@ dependencies {
     implementation (name: 'tfod-release', ext:'aar')
     implementation (name: 'tensorflow-lite-0.0.0-nightly', ext:'aar')
     implementation 'com.acmerobotics.dashboard:dashboard:0.3.10'
+    implementation 'com.spartronics4915.lib:ftc265:2.1.7'
 }
