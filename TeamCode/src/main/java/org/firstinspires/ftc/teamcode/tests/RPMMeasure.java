@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
 @TeleOp(name="RPM Measure", group="test")
+@Disabled
 public class RPMMeasure extends LinearOpMode {
     // CHANGE THESE
     private final String motorName = "testMotor";   // Name of motor in config

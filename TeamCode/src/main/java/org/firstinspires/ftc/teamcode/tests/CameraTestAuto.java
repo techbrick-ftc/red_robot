@@ -2,10 +2,12 @@ package org.firstinspires.ftc.teamcode.tests;
 
 import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.spartronics4915.lib.T265Camera;
 
 @Autonomous(name="Camera Test Autonomous", group="CamTest")
+@Disabled
 public class CameraTestAuto extends LinearOpMode {
     private T265Camera camera = null;
 
