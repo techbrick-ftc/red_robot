@@ -110,17 +110,16 @@ public class CameraMain {
         //writeTelemetry(deltaX, deltaY, driveTheta);
 
         final int robotRadius = 9;
-        Translation2d translation = new Translation2d(up.pose.getTranslation().getX() / 0.0254, up.pose.getTranslation().getY() / 0.0254);
         Rotation2d rotation = up.pose.getRotation();
 
-        field.strokeCircle(translation.getX(), translation.getY(), robotRadius);
+        field.strokeCircle(currentX, currentY, robotRadius);
         double arrowX = rotation.getCos() * robotRadius, arrowY = rotation.getSin() * robotRadius;
-        double x1 = translation.getX() + arrowX  / 2, y1 = translation.getY() + arrowY / 2;
-        double x2 = translation.getX() + arrowX, y2 = translation.getY() + arrowY;
+        double x1 = currentX + arrowX  / 2, y1 = currentY + arrowY / 2;
+        double x2 = currentX + arrowX, y2 = currentY + arrowY;
         field.strokeLine(x1, y1, x2, y2);
 
-        packet.put("X", translation.getX());
-        packet.put("Y", translation.getY());
+        packet.put("X", currentX);
+        packet.put("Y", currentY);
         packet.put("Confidence", up.confidence);
 
         dashboard.sendTelemetryPacket(packet);
