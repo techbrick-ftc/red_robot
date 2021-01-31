@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.libraries;
 import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.spartronics4915.lib.T265Camera;
@@ -20,7 +21,7 @@ public class Alexi {
     public DcMotor shooter = null;
     public Servo pusher = null;
 
-    public DcMotor wobbleMotor = null;
+    public DcMotorEx wobbleMotor = null;
     public Servo wobbleServo = null;
 
     public BNO055IMU imu = null;
@@ -47,7 +48,7 @@ public class Alexi {
         shooter = hardwareMap.get(DcMotor.class, "shooter");
         pusher = hardwareMap.get(Servo.class, "pusher");
 
-        wobbleMotor = hardwareMap.get(DcMotor.class, "wobbleMotor");
+        wobbleMotor = hardwareMap.get(DcMotorEx.class, "wobbleMotor");
         wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
 
         wobbleMotor.setTargetPosition(0);
