@@ -36,7 +36,10 @@ public class Alexi {
         rl = hardwareMap.get(DcMotor.class, "rl");
         rr = hardwareMap.get(DcMotor.class, "rr");
 
-        motors = new DcMotor[]{fl, fr, rl, rr};
+        rl.setDirection(DcMotor.Direction.REVERSE);
+        rr.setDirection(DcMotor.Direction.REVERSE);
+
+        motors = new DcMotor[]{fr, rr, rl, fl};
         angles = new double[]{PI / 4, 3 * PI / 4, 5 * PI / 4, 7 * PI / 4};
 
         intake = hardwareMap.get(DcMotor.class, "intake");
@@ -46,6 +49,10 @@ public class Alexi {
 
         wobbleMotor = hardwareMap.get(DcMotor.class, "wobbleMotor");
         wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
+
+        wobbleMotor.setTargetPosition(0);
+        wobbleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        wobbleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters params = new BNO055IMU.Parameters();

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.libraries;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -55,19 +56,30 @@ public class CameraMain {
         this.telemetry = telemetry;
     }
 
+    public void setPoseInternal(Pose2d pose) {
+        this.camera.setPose(pose);
+    }
+
     public boolean goToInternal(double moveX, double moveY, double theta, double speed) {
         // Wrap theta to localTheta
         double localTheta = wrap(theta);
         T265Camera.CameraUpdate up = camera.getLastReceivedCameraUpdate();
         if (up.confidence == T265Camera.PoseConfidence.Failed) { telemetry.addLine("Failed"); telemetry.update(); return false; }
-        telemetry.addLine("Camera Working");
-        telemetry.update();
 
         this.translation2d = up.pose.getTranslation();
 
         double currentX = this.translation2d.getX() / 0.0254;
         double currentY = this.translation2d.getY() / 0.0254;
         double currentTheta = gangles().firstAngle;
+
+        telemetry.addData("Current X", currentX);
+        telemetry.addData("Current Y", currentY);
+        telemetry.addData("Current Theta", currentTheta);
+        telemetry.update();
+        
+        System.out.println("Current X: " + currentX);
+        System.out.println("Current Y: " + currentY);
+        System.out.println("Current Theta: " + currentTheta);
 
         double deltaX = moveX - currentX;
         double deltaY = moveY - currentY;

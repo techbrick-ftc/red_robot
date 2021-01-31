@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.libraries;
 
+import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,7 +8,6 @@ import com.spartronics4915.lib.T265Camera;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.teamcode.mains.TeleAuto;
 import org.jetbrains.annotations.NotNull;
 
 public class CameraAuto {
@@ -36,6 +36,10 @@ public class CameraAuto {
      */
     public void setUp(DcMotor[] motors, double[] angles, T265Camera camera, BNO055IMU imu, AxesReference axesReference, Telemetry telemetry) {
         this.MAIN.setUpInternal(motors, angles, camera, imu, axesReference, telemetry);
+    }
+
+    public void setPose(Pose2d pose) {
+        this.MAIN.setPoseInternal(new Pose2d(pose.getTranslation().getX() * 0.0254, pose.getTranslation().getY() * 0.0254, pose.getRotation()));
     }
 
     public void goToPosition(double moveX, double moveY, TeleAuto callback) {
