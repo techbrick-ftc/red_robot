@@ -22,4 +22,18 @@ public class AutonomousFunctions {
         callback.sleep(1000);
         this.robot.wobbleServo.setPosition(1);
     }
+
+    public void armDownAndDrop() {
+        this.robot.wobbleMotor.setTargetPosition(-1368);
+        this.robot.wobbleMotor.setVelocity(800);
+        while(this.robot.wobbleMotor.isBusy() && this.callback.opModeIsActive()) {
+            this.callback.idle();
+        }
+        this.robot.wobbleServo.setPosition(1);
+        this.callback.sleep(1000);
+        this.robot.wobbleMotor.setTargetPosition(0);
+        while (this.robot.wobbleMotor.isBusy() && this.callback.opModeIsActive()) {
+            this.callback.idle();
+        }
+    }
 }
