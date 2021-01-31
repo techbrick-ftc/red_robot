@@ -12,7 +12,7 @@ import com.spartronics4915.lib.T265Camera;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.teamcode.libraries.CameraAuto;
-import org.firstinspires.ftc.teamcode.mains.TeleAuto;
+import org.firstinspires.ftc.teamcode.libraries.TeleAuto;
 
 import static java.lang.Math.PI;
 

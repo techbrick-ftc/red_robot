@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 @Config
 public class RobotConfig {
-    public static double motorSpeed = 0.2;
-    public static double gamepad1_leftstick_x = 0;
-    public static double gamepad1_leftstick_y = 0;
-    public static double gamepad1_rightstick_x = 0;
-    public static DcMotor.ZeroPowerBehavior braking = DcMotor.ZeroPowerBehavior.FLOAT;
+    public static double topLeftX = 80;
+    public static double topLeftY = 110;
+    public static int width = 70;
+    public static int height= 50;
+
+    public static int fourThreshold = 129;
+    public static int oneThreshold = 123;
 }

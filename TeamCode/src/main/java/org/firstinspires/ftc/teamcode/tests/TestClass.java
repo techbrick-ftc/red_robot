@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.CameraType;
-import org.firstinspires.ftc.teamcode.EasyOpenCVImportable;
+import org.firstinspires.ftc.teamcode.libraries.CameraType;
+import org.firstinspires.ftc.teamcode.libraries.EasyOpenCVImportable;
 import org.openftc.easyopencv.OpenCvCamera;
 
 @TeleOp(name="Test Class", group="Test")
