@@ -92,13 +92,21 @@ public class EasyOpenCVImportable {
 
     public OpenCvInternalCamera getPhoneCamera() { return this.phoneCamera; }
 
-    public RingNumber getDetection() { return this.pipeline.number; }
+    public RingNumber getDetection() {
+        int avg1 = this.pipeline.avg1;
+        if (avg1 > 0) {
+            return this.pipeline.number;
+        } else {
+            return RingNumber.UNKNOWN;
+        }
+    }
 
     public boolean getDetecting() { return this.detecting; }
 
     public int getAnalysis() { return this.pipeline.avg1; }
 
     public enum RingNumber {
+        UNKNOWN,
         NONE,
         ONE,
         FOUR
@@ -161,12 +169,12 @@ public class EasyOpenCVImportable {
                     region1_pointB,
                     BLUE, 2);
 
-            number = RingNumber.FOUR;
-            if (avg1 > FOUR_RING_THRESHOLD && avg1 != 0) {
+            number = RingNumber.UNKNOWN;
+            if (avg1 > FOUR_RING_THRESHOLD) {
                 number = RingNumber.FOUR;
-            } else if (avg1 > ONE_RING_THRESHOLD && avg1 != 0) {
+            } else if (avg1 > ONE_RING_THRESHOLD) {
                 number = RingNumber.ONE;
-            } else {
+            } else if (avg1 > 0) {
                 number = RingNumber.NONE;
             }
 
@@ -178,8 +186,6 @@ public class EasyOpenCVImportable {
 
             return input;
         }
-
-        public int getAnalysis() { return avg1; }
     }
 }
 

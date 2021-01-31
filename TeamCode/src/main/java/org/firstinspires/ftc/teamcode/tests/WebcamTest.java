@@ -17,7 +17,7 @@ public class WebcamTest extends LinearOpMode {
     public void runOpMode() {
         openCV.init(CameraType.WEBCAM, hardwareMap);
         openCV.setBox(80, 110, 70, 50);
-        openCV.setThresholds(137, 151);
+        openCV.setThresholds(135, 148);
 
         waitForStart();
 
