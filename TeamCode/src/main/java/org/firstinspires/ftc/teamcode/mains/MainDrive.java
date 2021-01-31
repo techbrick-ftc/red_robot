@@ -6,9 +6,14 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.teamcode.libraries.FieldCentric;
+import org.firstinspires.ftc.teamcode.libraries.TeleAuto;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -31,9 +36,12 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
     private boolean shooterWait = false;
     private boolean pusherWait = false;
 
-    private DcMotor wobbleMotor;
+    private DcMotorEx wobbleMotor;
     private Servo wobbleServo;
-    private double wobblePosition = -0.8;
+    private int[] wobblePositions = {0, -734, -1368, -1641};
+    private double wobbleSpeed = 0;
+    private int wobblePosition = 0;
+    private boolean wobbleWait = false;
 
     private boolean a1Wait = false;
     private boolean b1Wait = false;
@@ -46,7 +54,6 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
 
     ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     ScheduledFuture<?> pushEvent = null;
-    ScheduledFuture<?> wobbleEvent = null;
 
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
     private final TelemetryPacket packet = new TelemetryPacket();
@@ -61,8 +68,10 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
         shooter = hardwareMap.get(DcMotor.class, "shooter");
         pusher = hardwareMap.get(Servo.class, "pusher");
 
-        wobbleMotor = hardwareMap.get(DcMotor.class, "wobbleMotor");
+        wobbleMotor = hardwareMap.get(DcMotorEx.class, "wobbleMotor");
         wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
+
+        wobbleMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         rl.setDirection(DcMotor.Direction.REVERSE);
         rr.setDirection(DcMotor.Direction.REVERSE);
@@ -91,7 +100,10 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
                 centric.resetAngle();
             }
 
-            if (gamepad2.b && !shooterWait) {
+            centric.gyro(imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.RADIANS).thirdAngle);
+            centric.Drive(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
+
+            if (gamepad2.y && !shooterWait) {
                 if (!shooterOn) {
                     shooter.setPower(0.8);
                     shooterOn = true;
@@ -100,13 +112,9 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
                     shooterOn = false;
                 }
                 shooterWait = true;
-            } else if (!gamepad2.b) {
+            } else if (!gamepad2.y) {
                 shooterWait = false;
             }
-
-            telemetry.addData("Gamepad 2 B", gamepad2.b);
-            telemetry.addData("Shooter Wait", shooterWait);
-            telemetry.update();
 
             if (gamepad2.a && !pusherWait && pushEvent.isDone()) {
                 pusher.setPosition(0.1);
@@ -118,11 +126,33 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
 
             wobbleMotor.setPower(gamepad2.left_stick_x);
 
-            if ((gamepad2.right_stick_x > 0.1 || gamepad2.right_stick_x < -0.1) && wobbleEvent.isDone()) {
-                wobblePosition += gamepad2.right_stick_x / 10;
-                wobbleEvent = executorService.schedule(() -> {}, 100, TimeUnit.MILLISECONDS);
+            if (gamepad2.x) {
+                wobbleServo.setPosition(-1);
+            } else if (gamepad2.b) {
+                wobbleServo.setPosition(1);
             }
-            wobbleServo.setPosition(wobblePosition);
+
+            if (gamepad2.dpad_right && wobblePosition < 3 && !wobbleWait) {
+                wobblePosition++;
+                wobbleWait = true;
+            } else if (gamepad2.dpad_left && wobblePosition > 0 && !wobbleWait) {
+                wobblePosition--;
+                wobbleWait = true;
+            } else if (!gamepad2.dpad_right && !gamepad2.dpad_left) { wobbleWait = false; }
+            wobbleMotor.setTargetPosition(wobblePositions[wobblePosition]);
+            if (wobbleMotor.isBusy()) {
+                wobbleMotor.setVelocity(800);
+            } else {
+                wobbleMotor.setVelocity(0);
+            }
+
+            telemetry.addData("Target", wobbleMotor.getTargetPosition());
+            telemetry.addData("Position", wobblePosition);
+            telemetry.addData("Wobble Speed", wobbleSpeed);
+            telemetry.addData("Is Busy", wobbleMotor.isBusy());
+            telemetry.addData("Gamepad2 Dpad Right", gamepad2.dpad_right);
+            telemetry.addData("Wobble Wait", wobbleWait);
+            telemetry.update();
 
             double intakePower = gamepad1.right_trigger - gamepad1.left_trigger;
             intake.setPower(intakePower);
@@ -131,7 +161,6 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
 
     private void startScheduler() {
         pushEvent = executorService.schedule(() -> {}, 0, TimeUnit.MILLISECONDS);
-        wobbleEvent = executorService.schedule(() -> {}, 0, TimeUnit.MILLISECONDS);
     }
 
     private void schedulePusher() {
