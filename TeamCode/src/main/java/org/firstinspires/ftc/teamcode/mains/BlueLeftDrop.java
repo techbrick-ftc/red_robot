@@ -47,7 +47,7 @@ public class BlueLeftDrop extends LinearOpMode implements TeleAuto {
                 openCV.stopDetection();
                 drive.goTo(10, 45, 0, this);
                 auto.armDownAndDrop();
-                drive.goToPosition(12, 45, this);
+                drive.goToPosition(6, 0, this);
             }
         }
     }
