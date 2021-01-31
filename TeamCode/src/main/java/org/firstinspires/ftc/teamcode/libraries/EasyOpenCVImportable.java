@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.libraries;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.CameraType;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -20,10 +19,21 @@ public class EasyOpenCVImportable {
     private OpenCvCamera webCamera;
     private OpenCvInternalCamera phoneCamera;
 
+    private CameraType cameraType;
+
     private UltimateGoalDetectionPipeline pipeline;
     private boolean detecting;
 
+    private double topLeftX = 181;
+    private double topLeftY = 98;
+    private int width = 90;
+    private int height = 60;
+
+    private int fourThresh = 129;
+    private int oneThresh = 123;
+
     public void init(CameraType cameraType, final HardwareMap hardwareMap) {
+        this.cameraType = cameraType;
         if (cameraType.equals(CameraType.WEBCAM)) {
             initWebcam(hardwareMap, "Webcam 1");
         } else {
@@ -41,7 +51,18 @@ public class EasyOpenCVImportable {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         this.phoneCamera = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
         this.phoneCamera.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
+    }
 
+    public void setBox(double topLeftX, double topLeftY, int width, int height) {
+        this.topLeftX = topLeftX;
+        this.topLeftY = topLeftY;
+        this.width = width;
+        this.height = height;
+    }
+
+    public void setThresholds(int oneThresh, int fourThresh) {
+        this.oneThresh = oneThresh;
+        this.fourThresh = fourThresh;
     }
 
     public void startDetection() {
@@ -49,27 +70,17 @@ public class EasyOpenCVImportable {
         if (this.phoneCamera == null) {
             this.webCamera.setPipeline(this.pipeline);
 
-            this.webCamera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-                @Override
-                public void onOpened() {
-                    webCamera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
-                }
-            });
+            this.webCamera.openCameraDeviceAsync(() -> webCamera.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT));
             this.detecting = true;
         } else {
             this.phoneCamera.setPipeline(this.pipeline);
 
-            this.phoneCamera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-                @Override
-                public void onOpened() {
-                    phoneCamera.startStreaming(320, 240, OpenCvCameraRotation.SIDEWAYS_LEFT);
-                }
-            });
+            this.phoneCamera.openCameraDeviceAsync(() -> phoneCamera.startStreaming(320, 240, OpenCvCameraRotation.SIDEWAYS_LEFT));
         }
     }
 
     public void stopDetection() {
-        if (this.phoneCamera == null) {
+        if (this.cameraType.equals(CameraType.WEBCAM)) {
             this.webCamera.stopStreaming();
         } else {
             this.phoneCamera.stopStreaming();
@@ -85,27 +96,27 @@ public class EasyOpenCVImportable {
 
     public boolean getDetecting() { return this.detecting; }
 
+    public int getAnalysis() { return this.pipeline.avg1; }
+
     public enum RingNumber {
         NONE,
         ONE,
         FOUR
     }
 
-    private static class UltimateGoalDetectionPipeline extends OpenCvPipeline {
-
-
+    private class UltimateGoalDetectionPipeline extends OpenCvPipeline {
         // Color constants
-        static final Scalar BLUE = new Scalar(0, 0, 255);
-        static final Scalar GREEN = new Scalar(0, 255, 0);
+        final Scalar BLUE = new Scalar(0, 0, 255);
+        final Scalar GREEN = new Scalar(0, 255, 0);
 
         // Core values for position and size
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(181, 98);
+        final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(topLeftX, topLeftY);
 
-        static final int REGION_WIDTH = 90;
-        static final int REGION_HEIGHT = 60;
+        final int REGION_WIDTH = width;
+        final int REGION_HEIGHT = height;
 
-        final int FOUR_RING_THRESHOLD = 129;
-        final int ONE_RING_THRESHOLD = 123;
+        final int FOUR_RING_THRESHOLD = fourThresh;
+        final int ONE_RING_THRESHOLD = oneThresh;
 
         Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
@@ -151,9 +162,9 @@ public class EasyOpenCVImportable {
                     BLUE, 2);
 
             number = RingNumber.FOUR;
-            if (avg1 > FOUR_RING_THRESHOLD) {
+            if (avg1 > FOUR_RING_THRESHOLD && avg1 != 0) {
                 number = RingNumber.FOUR;
-            } else if (avg1 > ONE_RING_THRESHOLD) {
+            } else if (avg1 > ONE_RING_THRESHOLD && avg1 != 0) {
                 number = RingNumber.ONE;
             } else {
                 number = RingNumber.NONE;
