@@ -18,7 +18,7 @@ public class Alexi {
 
     public DcMotor intake = null;
 
-    public DcMotor shooter = null;
+    public DcMotorEx shooter = null;
     public Servo pusher = null;
 
     public DcMotorEx wobbleMotor = null;
@@ -45,7 +45,7 @@ public class Alexi {
 
         intake = hardwareMap.get(DcMotor.class, "intake");
 
-        shooter = hardwareMap.get(DcMotor.class, "shooter");
+        shooter = hardwareMap.get(DcMotorEx.class, "shooter");
         pusher = hardwareMap.get(Servo.class, "pusher");
 
         wobbleMotor = hardwareMap.get(DcMotorEx.class, "wobbleMotor");
