@@ -40,9 +40,15 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
         boolean pusherWait = false;
         boolean shooterOn = false;
 
-        double shooterSpeed = 4500;
+        double shooterSpeed = 0;
         double shooterTempSpeed = 4500;
         boolean shooterWait = false;
+
+        boolean slow = false;
+        boolean slowWait = false;
+        double xSpeed = 0;
+        double ySpeed = 0;
+        double turnSpeed = 0;
 
         centric.setUp(robot.motors, robot.angles, robot.imu);
 
@@ -55,6 +61,23 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
         while (opModeIsActive()) {
             if (gamepad1.back) {
                 centric.resetAngle();
+            }
+
+            xSpeed = gamepad1.left_stick_x;
+            ySpeed = -gamepad1.left_stick_y;
+            turnSpeed = -gamepad1.right_stick_x;
+
+            if (gamepad1.right_bumper && !slowWait) {
+                slow = !slow;
+                slowWait = true;
+            } else if (!gamepad1.right_bumper) {
+                slowWait = false;
+            }
+
+            if (slow) {
+                xSpeed /= 2;
+                ySpeed /= 2;
+                turnSpeed /= 2;
             }
 
             centric.gyro(robot.imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.RADIANS).thirdAngle);
@@ -73,6 +96,8 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
                 shooterWait = false;
             }
 
+            telemetry.addData("Gamepad2 y", gamepad2.y);
+
             robot.shooter.setVelocity(shooterSpeed);
 
             if (gamepad1.dpad_up && !shooterWait) {
@@ -85,7 +110,8 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
                 shooterWait = false;
             }
 
-            telemetry.addData("Shooter speed", shooterTempSpeed);
+            telemetry.addData("Shooter temp speed", shooterTempSpeed);
+            telemetry.addData("Shooter speed", robot.shooter.getVelocity());
 
             if (robot.shooter.getVelocity() >= shooterTempSpeed) {
                 telemetry.addLine("READY FIRE");

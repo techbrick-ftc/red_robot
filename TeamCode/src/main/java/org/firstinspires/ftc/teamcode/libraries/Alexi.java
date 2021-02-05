@@ -48,6 +48,8 @@ public class Alexi {
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
         pusher = hardwareMap.get(Servo.class, "pusher");
 
+        shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         wobbleMotor = hardwareMap.get(DcMotorEx.class, "wobbleMotor");
         wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
 

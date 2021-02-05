@@ -27,11 +27,11 @@ public class BlueRightDrop extends LinearOpMode implements TeleAuto {
         robot.wobbleServo.setPosition(-1);
 
         drive.setUp(robot.motors, robot.angles, robot.camera, robot.imu, AxesReference.EXTRINSIC, telemetry);
-        drive.setPose(new Pose2d(-56, 17, new Rotation2d()));
+        drive.setPose(new Pose2d(-56, 23, new Rotation2d()));
 
         openCV.init(CameraType.WEBCAM, hardwareMap);
-        openCV.setBox(80, 110, 70, 50);
-        openCV.setThresholds(135, 148);
+        openCV.setBox(10, 110, 70, 70);
+        openCV.setThresholds(133, 143);
 
         waitForStart();
 
@@ -52,6 +52,12 @@ public class BlueRightDrop extends LinearOpMode implements TeleAuto {
                 openCV.stopDetection();
                 drive.goToPosition(-22, 10, this);
                 drive.goTo(36, 24, 0, this);
+                auto.armDownAndDrop();
+                drive.goToPosition(12, 12, this);
+            } else if (openCV.getDetection().equals(EasyOpenCVImportable.RingNumber.FOUR)) {
+                openCV.stopDetection();
+                drive.goToPosition(-22, 10, this);
+                drive.goTo(58, 45, 0, this);
                 auto.armDownAndDrop();
                 drive.goToPosition(12, 12, this);
             }
