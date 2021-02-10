@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class MainDrive extends LinearOpMode implements TeleAuto {
     private Alexi robot = new Alexi();
 
-    private int[] wobblePositions = {0, -734, -1368, -1641};
+    private int[] wobblePositions = {0, -770, -1400, -1750};
     private double wobbleSpeed = 0;
     private int wobblePosition = 0;
     private boolean wobbleWait = false;
@@ -41,7 +41,7 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
         boolean shooterOn = false;
 
         double shooterSpeed = 0;
-        double shooterTempSpeed = 4500;
+        double shooterTempSpeed = 2250;
         boolean shooterWait = false;
 
         boolean slow = false;
@@ -100,13 +100,13 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
 
             robot.shooter.setVelocity(shooterSpeed);
 
-            if (gamepad1.dpad_up && !shooterWait) {
+            if (gamepad2.right_bumper && !shooterWait) {
                 shooterTempSpeed += 500;
                 shooterWait = true;
-            } else if (gamepad1.dpad_down && !shooterWait) {
+            } else if (gamepad2.left_bumper && !shooterWait) {
                 shooterTempSpeed -= 500;
                 shooterWait = true;
-            } else if (!gamepad1.dpad_up && !gamepad1.dpad_down) {
+            } else if (!gamepad2.left_bumper && !gamepad2.right_bumper) {
                 shooterWait = false;
             }
 

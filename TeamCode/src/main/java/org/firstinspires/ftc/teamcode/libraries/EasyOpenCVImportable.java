@@ -15,6 +15,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
+import java.util.Vector;
+
 public class EasyOpenCVImportable {
     private OpenCvCamera webCamera;
     private OpenCvInternalCamera phoneCamera;
@@ -105,6 +107,10 @@ public class EasyOpenCVImportable {
 
     public int getAnalysis() { return this.pipeline.avg1; }
 
+    public int getHValue() { return this.pipeline.hAvg; }
+    public int getSValue() { return this.pipeline.sAvg; }
+    public int getVValue() { return this.pipeline.vAvg; }
+
     public enum RingNumber {
         UNKNOWN,
         NONE,
@@ -135,9 +141,17 @@ public class EasyOpenCVImportable {
 
         // Working variables
         Mat region1_Cb;
+        Mat region1_h;
+        Mat region1_s;
+        Mat region1_v;
         Mat YCrCb = new Mat();
         Mat Cb = new Mat();
+        Mat HSV = new Mat();
+        Vector<Mat> hsv_planes = new Vector<>();
         int avg1;
+        int hAvg;
+        int sAvg;
+        int vAvg;
 
         // Volatile since accessed by OpMode w/o synchronization
         private volatile RingNumber number = RingNumber.FOUR;
@@ -151,38 +165,33 @@ public class EasyOpenCVImportable {
             Core.extractChannel(YCrCb, Cb, 1);
         }
 
+        void inputToHSV(Mat input){
+            Imgproc.cvtColor(input, HSV, Imgproc.COLOR_RGB2HSV);
+            Core.split(HSV, hsv_planes);
+        }
+
         @Override
         public void init(Mat firstFrame) {
-            inputToCb(firstFrame);
+            inputToHSV(firstFrame);
             region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
+            //region1_h = hsv_planes.get(0).submat(new Rect(region1_pointA, region1_pointB));
+            //region1_s = hsv_planes.get(1).submat(new Rect(region1_pointA, region1_pointB));
+            //region1_v = hsv_planes.get(2).submat(new Rect(region1_pointA, region1_pointB));
         }
 
         @Override
         public Mat processFrame(Mat input) {
-            inputToCb(input);
+            inputToHSV(input);
 
-            avg1 = (int) Core.mean(region1_Cb).val[0];
+            hAvg = (int) Core.mean(region1_h).val[0];
+            sAvg = (int) Core.mean(region1_s).val[0];
+            vAvg = (int) Core.mean(region1_v).val[0];
 
             Imgproc.rectangle(
                     input,
                     region1_pointA,
                     region1_pointB,
                     BLUE, 2);
-
-            number = RingNumber.UNKNOWN;
-            if (avg1 > FOUR_RING_THRESHOLD) {
-                number = RingNumber.FOUR;
-            } else if (avg1 > ONE_RING_THRESHOLD) {
-                number = RingNumber.ONE;
-            } else if (avg1 > 0) {
-                number = RingNumber.NONE;
-            }
-
-            Imgproc.rectangle(
-                    input,
-                    region1_pointA,
-                    region1_pointB,
-                    GREEN, -1);
 
             return input;
         }

@@ -75,7 +75,6 @@ public class CameraMain {
         telemetry.addData("Current X", currentX);
         telemetry.addData("Current Y", currentY);
         telemetry.addData("Current Theta", currentTheta);
-        telemetry.update();
         
         System.out.println("Current X: " + currentX);
         System.out.println("Current Y: " + currentY);
@@ -85,9 +84,9 @@ public class CameraMain {
         double deltaY = moveY - currentY;
         double deltaTheta = wrap(localTheta - currentTheta);
 
-        xComplete = abs(deltaX) < 0.3;
-        yComplete = abs(deltaY) < 0.3;
-        turnComplete = abs(deltaTheta) < 0.2;
+        xComplete = abs(deltaX) < 0.2;
+        yComplete = abs(deltaY) < 0.2;
+        turnComplete = abs(deltaTheta) < 0.05;
 
         if (xComplete && yComplete && turnComplete) {
             stopWheel();
@@ -99,12 +98,12 @@ public class CameraMain {
 
         double localSpeed = speed;
         if (abs(deltaX) < 5 && abs(deltaY) < 5) {
-            localSpeed *= avg(abs(deltaX), abs(deltaY)) / 10;
+            localSpeed *= avg(abs(deltaX), abs(deltaY)) / 12;
         }
         localSpeed = clamp(0.2, 1, localSpeed);
 
         for (int i = 0; i < this.motors.length; i++) {
-            double motorSpeed = Math.sin(this.angles[i] - driveTheta) * localSpeed + deltaTheta;
+            double motorSpeed = (Math.sin(this.angles[i] - driveTheta) + clamp(-1, 1, deltaTheta)) * localSpeed;
             if (motorSpeed < 0.1 && motorSpeed > -0.1) { motorSpeed = 0; } else
             if (motorSpeed < 0.2 && motorSpeed > 0.1) { motorSpeed = 0.2; } else
             if (motorSpeed > -0.2 && motorSpeed < -0.1) { motorSpeed = -0.2; }
@@ -135,6 +134,7 @@ public class CameraMain {
         packet.put("Confidence", up.confidence);
 
         dashboard.sendTelemetryPacket(packet);
+        telemetry.update();
 
         return false;
     }
