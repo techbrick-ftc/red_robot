@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.tests;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
@@ -10,7 +11,7 @@ import org.firstinspires.ftc.teamcode.libraries.CameraType;
 import org.firstinspires.ftc.teamcode.libraries.EasyOpenCVImportable;
 
 @Autonomous(name="Webcam Test", group="test")
-//@Disabled
+@Disabled
 public class WebcamTest extends LinearOpMode {
     EasyOpenCVImportable openCV = new EasyOpenCVImportable();
     FtcDashboard dashboard = FtcDashboard.getInstance();
