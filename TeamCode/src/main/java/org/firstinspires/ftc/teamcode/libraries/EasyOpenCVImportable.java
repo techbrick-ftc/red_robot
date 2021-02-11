@@ -15,8 +15,6 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-import java.util.Vector;
-
 public class EasyOpenCVImportable {
     private OpenCvCamera webCamera;
     private OpenCvInternalCamera phoneCamera;
@@ -26,13 +24,20 @@ public class EasyOpenCVImportable {
     private UltimateGoalDetectionPipeline pipeline;
     private boolean detecting;
 
-    private double topLeftX = 181;
-    private double topLeftY = 98;
+    private double fieldTopLeftX = 181;
+    private double fieldTopLeftY = 98;
+
+    private double bottomTopLeftX = 181;
+    private double bottomTopLeftY = 98;
+
+    private double topTopLeftX = 181;
+    private double topTopLeftY = 98;
+
     private int width = 90;
     private int height = 60;
 
-    private int fourThresh = 129;
-    private int oneThresh = 123;
+    private int ringDiff = 129;
+    private int fieldDiff = 123;
 
     public void init(CameraType cameraType, final HardwareMap hardwareMap) {
         this.cameraType = cameraType;
@@ -55,16 +60,29 @@ public class EasyOpenCVImportable {
         this.phoneCamera.setViewportRenderingPolicy(OpenCvCamera.ViewportRenderingPolicy.OPTIMIZE_VIEW);
     }
 
-    public void setBox(double topLeftX, double topLeftY, int width, int height) {
-        this.topLeftX = topLeftX;
-        this.topLeftY = topLeftY;
+    public void setFieldBox(double topLeftX, double topLeftY) {
+        this.fieldTopLeftX = topLeftX;
+        this.fieldTopLeftY = topLeftY;
+    }
+
+    public void setBottomBox(double topLeftX, double topLeftY) {
+        this.bottomTopLeftX = topLeftX;
+        this.bottomTopLeftY = topLeftY;
+    }
+
+    public void setTopBox(double topLeftX, double topLeftY) {
+        this.topTopLeftX = topLeftX;
+        this.topTopLeftY = topLeftY;
+    }
+
+    public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public void setThresholds(int oneThresh, int fourThresh) {
-        this.oneThresh = oneThresh;
-        this.fourThresh = fourThresh;
+    public void setDifferences(int fieldDiff, int ringDiff) {
+        this.fieldDiff = fieldDiff;
+        this.ringDiff = ringDiff;
     }
 
     public void startDetection() {
@@ -95,21 +113,14 @@ public class EasyOpenCVImportable {
     public OpenCvInternalCamera getPhoneCamera() { return this.phoneCamera; }
 
     public RingNumber getDetection() {
-        int avg1 = this.pipeline.avg1;
-        if (avg1 > 0) {
-            return this.pipeline.number;
-        } else {
-            return RingNumber.UNKNOWN;
-        }
+        return this.pipeline.number;
     }
 
     public boolean getDetecting() { return this.detecting; }
 
-    public int getAnalysis() { return this.pipeline.avg1; }
-
-    public int getHValue() { return this.pipeline.hAvg; }
-    public int getSValue() { return this.pipeline.sAvg; }
-    public int getVValue() { return this.pipeline.vAvg; }
+    public int getFieldAnalysis() { return this.pipeline.fieldAvg; }
+    public int getBottomAnalysis() { return this.pipeline.bottomAvg; }
+    public int getTopAnalysis() { return this.pipeline.topAvg; }
 
     public enum RingNumber {
         UNKNOWN,
@@ -122,39 +133,70 @@ public class EasyOpenCVImportable {
         // Color constants
         final Scalar BLUE = new Scalar(0, 0, 255);
         final Scalar GREEN = new Scalar(0, 255, 0);
+        final Scalar RED = new Scalar(255, 0, 0);
 
         // Core values for position and size
-        final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(topLeftX, topLeftY);
+        //final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(fieldTopLeftX, fieldTopLeftY);
+        final Point FIELD_TOPLEFT_ANCHOR_POINT = new Point(fieldTopLeftX, fieldTopLeftY);
+        final Point BOTTOM_TOPLEFT_ANCHOR_POINT = new Point(bottomTopLeftX, bottomTopLeftY);
+        final Point TOP_TOPLEFT_ANCHOR_POINT = new Point(topTopLeftX, topTopLeftY);
 
-        final int REGION_WIDTH = width;
-        final int REGION_HEIGHT = height;
+        /*final int REGION_WIDTH = fieldWidth;
+        final int REGION_HEIGHT = fieldHeight;*/
+        final int BOX_WIDTH = width;
+        final int BOX_HEIGHT = height;
 
-        final int FOUR_RING_THRESHOLD = fourThresh;
-        final int ONE_RING_THRESHOLD = oneThresh;
+        final int FIELD_DIFF = fieldDiff;
+        final int RING_DIFF = ringDiff;
 
-        Point region1_pointA = new Point(
+        /*Point region1_pointA = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x,
                 REGION1_TOPLEFT_ANCHOR_POINT.y);
         Point region1_pointB = new Point(
                 REGION1_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
-                REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
+                REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);*/
+
+        Point field_pointA = new Point(
+                FIELD_TOPLEFT_ANCHOR_POINT.x,
+                FIELD_TOPLEFT_ANCHOR_POINT.y
+        );
+        Point field_pointB = new Point(
+                FIELD_TOPLEFT_ANCHOR_POINT.x  + BOX_WIDTH,
+                FIELD_TOPLEFT_ANCHOR_POINT.y + BOX_HEIGHT
+        );
+
+        Point bottom_pointA = new Point(
+                BOTTOM_TOPLEFT_ANCHOR_POINT.x,
+                BOTTOM_TOPLEFT_ANCHOR_POINT.y
+        );
+        Point bottom_pointB = new Point(
+                BOTTOM_TOPLEFT_ANCHOR_POINT.x + BOX_WIDTH,
+                BOTTOM_TOPLEFT_ANCHOR_POINT.y + BOX_HEIGHT
+        );
+
+        Point top_pointA = new Point(
+                TOP_TOPLEFT_ANCHOR_POINT.x,
+                TOP_TOPLEFT_ANCHOR_POINT.y
+        );
+        Point top_pointB = new Point(
+                TOP_TOPLEFT_ANCHOR_POINT.x + BOX_WIDTH,
+                TOP_TOPLEFT_ANCHOR_POINT.y + BOX_HEIGHT
+        );
 
         // Working variables
-        Mat region1_Cb;
-        Mat region1_h;
-        Mat region1_s;
-        Mat region1_v;
+        //Mat region1_Cb;
+        Mat field_Cb;
+        Mat bottom_Cb;
+        Mat top_Cb;
         Mat YCrCb = new Mat();
         Mat Cb = new Mat();
-        Mat HSV = new Mat();
-        Vector<Mat> hsv_planes = new Vector<>();
-        int avg1;
-        int hAvg;
-        int sAvg;
-        int vAvg;
+        //int avg1;
+        int fieldAvg;
+        int bottomAvg;
+        int topAvg;
 
         // Volatile since accessed by OpMode w/o synchronization
-        private volatile RingNumber number = RingNumber.FOUR;
+        private volatile RingNumber number = RingNumber.UNKNOWN;
 
         /*
             This take the RGB frame and converts it to YCrCb,
@@ -165,33 +207,61 @@ public class EasyOpenCVImportable {
             Core.extractChannel(YCrCb, Cb, 1);
         }
 
-        void inputToHSV(Mat input){
-            Imgproc.cvtColor(input, HSV, Imgproc.COLOR_RGB2HSV);
-            Core.split(HSV, hsv_planes);
-        }
-
         @Override
         public void init(Mat firstFrame) {
-            inputToHSV(firstFrame);
-            region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
-            //region1_h = hsv_planes.get(0).submat(new Rect(region1_pointA, region1_pointB));
-            //region1_s = hsv_planes.get(1).submat(new Rect(region1_pointA, region1_pointB));
-            //region1_v = hsv_planes.get(2).submat(new Rect(region1_pointA, region1_pointB));
+            inputToCb(firstFrame);
+            field_Cb = Cb.submat(new Rect(field_pointA, field_pointB));
+            bottom_Cb = Cb.submat(new Rect(bottom_pointA, bottom_pointB));
+            top_Cb = Cb.submat(new Rect(top_pointA, top_pointB));
         }
 
         @Override
         public Mat processFrame(Mat input) {
-            inputToHSV(input);
+            inputToCb(input);
 
-            hAvg = (int) Core.mean(region1_h).val[0];
-            sAvg = (int) Core.mean(region1_s).val[0];
-            vAvg = (int) Core.mean(region1_v).val[0];
+            fieldAvg = (int) Core.mean(field_Cb).val[0];
+            bottomAvg = (int) Core.mean(bottom_Cb).val[0];
+            topAvg = (int) Core.mean(top_Cb).val[0];
 
+            if (fieldAvg == 0 ||
+                bottomAvg == 0 ||
+                topAvg == 0) {
+                return input;
+            }
+
+            if (bottomAvg < fieldAvg + fieldDiff && bottomAvg > fieldAvg - fieldDiff) {
+                number = RingNumber.NONE;
+            } else {
+                if (topAvg < bottomAvg + ringDiff && topAvg > bottomAvg - ringDiff) {
+                    number = RingNumber.FOUR;
+                } else {
+                    number = RingNumber.ONE;
+                }
+            }
+
+            // Field box
             Imgproc.rectangle(
                     input,
-                    region1_pointA,
-                    region1_pointB,
-                    BLUE, 2);
+                    field_pointA,
+                    field_pointB,
+                    BLUE, 2
+            );
+
+            // Bottom box
+            Imgproc.rectangle(
+                    input,
+                    bottom_pointA,
+                    bottom_pointB,
+                    RED, 2
+            );
+
+            // Top box
+            Imgproc.rectangle(
+                    input,
+                    top_pointA,
+                    top_pointB,
+                    GREEN, 2
+            );
 
             return input;
         }

@@ -30,8 +30,8 @@ public class BlueLeftDrop extends LinearOpMode implements TeleAuto {
         drive.setPose(new Pose2d(-56, 46, new Rotation2d()));
 
         openCV.init(CameraType.WEBCAM, hardwareMap);
-        openCV.setBox(250, 140, 70, 50);
-        openCV.setThresholds(135, 148);
+        //openCV.setFieldBox(250, 140, 70, 50);
+        openCV.setDifferences(135, 148);
 
         waitForStart();
 

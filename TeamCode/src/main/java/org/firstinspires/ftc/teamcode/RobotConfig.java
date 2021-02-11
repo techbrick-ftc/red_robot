@@ -4,11 +4,18 @@ import com.acmerobotics.dashboard.config.Config;
 
 @Config
 public class RobotConfig {
-    public static double topLeftX = 80;
-    public static double topLeftY = 110;
-    public static int width = 70;
-    public static int height= 50;
+    public static double fieldX = 80;
+    public static double fieldY = 110;
+    
+    public static double bottomX = 80;
+    public static double bottomY = 110;
 
-    public static int fourThreshold = 129;
-    public static int oneThreshold = 123;
+    public static double topX = 80;
+    public static double topY = 110;
+
+    public static int boxWidth = 70;
+    public static int boxHeight= 50;
+
+    public static int fieldDiff = 10;
+    public static int ringDiff = 10;
 }

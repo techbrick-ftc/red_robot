@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.libraries.CameraType;
 import org.firstinspires.ftc.teamcode.libraries.EasyOpenCVImportable;
 
@@ -17,8 +18,11 @@ public class WebcamTest extends LinearOpMode {
 
     public void runOpMode() {
         openCV.init(CameraType.WEBCAM, hardwareMap);
-        openCV.setBox(80, 110, 70, 50);
-        openCV.setThresholds(135, 148);
+        openCV.setFieldBox(RobotConfig.fieldX, RobotConfig.fieldY);
+        openCV.setBottomBox(RobotConfig.bottomX, RobotConfig.bottomY);
+        openCV.setTopBox(RobotConfig.topX, RobotConfig.topY);
+        openCV.setSize(RobotConfig.boxWidth, RobotConfig.boxHeight);
+        openCV.setDifferences(RobotConfig.fieldDiff, RobotConfig.ringDiff);
 
         waitForStart();
 
@@ -26,11 +30,10 @@ public class WebcamTest extends LinearOpMode {
         dashboard.startCameraStream(openCV.getWebCamera(), 0);
 
         while (opModeIsActive()) {
-            packet.clearLines();
-            packet.put("Avg1", openCV.getAnalysis());
-            packet.put("H Value", openCV.getHValue());
-            packet.put("S Value", openCV.getSValue());
-            packet.put("V Value", openCV.getVValue());
+            packet.put("Field", openCV.getFieldAnalysis());
+            packet.put("Bottom", openCV.getBottomAnalysis());
+            packet.put("Top", openCV.getTopAnalysis());
+            packet.put("Detected", openCV.getDetection());
             dashboard.sendTelemetryPacket(packet);
         }
 
