@@ -39,10 +39,11 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
 
         boolean pusherWait = false;
         boolean shooterOn = false;
+        boolean shooterWait = false;
 
         double shooterSpeed = 0;
-        double shooterTempSpeed = 2250;
-        boolean shooterWait = false;
+        double shooterTempSpeed = 2500;
+        boolean shooterSpeedWait = false;
 
         boolean slow = false;
         boolean slowWait = false;
@@ -84,30 +85,32 @@ public class MainDrive extends LinearOpMode implements TeleAuto {
             centric.Drive(gamepad1.left_stick_x, -gamepad1.left_stick_y, -gamepad1.right_stick_x);
 
             if (gamepad2.y && !shooterWait) {
-                if (!shooterOn) {
-                    shooterSpeed = shooterTempSpeed;
-                    shooterOn = true;
-                } else {
-                    shooterSpeed = 0;
-                    shooterOn = false;
-                }
+                shooterOn = !shooterOn;
                 shooterWait = true;
             } else if (!gamepad2.y) {
                 shooterWait = false;
             }
 
+            if (shooterOn) {
+                shooterSpeed = shooterTempSpeed;
+            } else { shooterSpeed = 0; }
+
             telemetry.addData("Gamepad2 y", gamepad2.y);
 
             robot.shooter.setVelocity(shooterSpeed);
 
-            if (gamepad2.right_bumper && !shooterWait) {
-                shooterTempSpeed += 500;
-                shooterWait = true;
-            } else if (gamepad2.left_bumper && !shooterWait) {
-                shooterTempSpeed -= 500;
-                shooterWait = true;
+            if (gamepad2.right_bumper && !shooterSpeedWait) {
+                if (shooterTempSpeed != 2500) {
+                    shooterTempSpeed += 100;
+                    shooterSpeedWait = true;
+                }
+            } else if (gamepad2.left_bumper && !shooterSpeedWait) {
+                if (shooterTempSpeed != 1000) {
+                    shooterTempSpeed -= 100;
+                    shooterSpeedWait = true;
+                }
             } else if (!gamepad2.left_bumper && !gamepad2.right_bumper) {
-                shooterWait = false;
+                shooterSpeedWait = false;
             }
 
             telemetry.addData("Shooter temp speed", shooterTempSpeed);

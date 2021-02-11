@@ -4,6 +4,7 @@ import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.spartronics4915.lib.T265Camera;
@@ -49,6 +50,7 @@ public class Alexi {
         pusher = hardwareMap.get(Servo.class, "pusher");
 
         shooter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
 
         wobbleMotor = hardwareMap.get(DcMotorEx.class, "wobbleMotor");
         wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
