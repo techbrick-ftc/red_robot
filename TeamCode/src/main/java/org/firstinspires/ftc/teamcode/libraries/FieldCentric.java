@@ -59,21 +59,18 @@ public class FieldCentric {
             (The speed)
          */
         r = Math.sqrt(x*x+y*y);
-        packet.put("r", r);
 
         /*
             Set theta (for polar coords) to the theta of the point (x,y) to the x-axis at the origin
             (The direction to go)
          */
         theta = Math.atan2(x, y);
-        packet.put("theta", theta);
 
         /*
             Add current angle to account for rotation (since we are getting the theta from a controller
             axis (-1.0 to 1.0) we don't know the angle we are currently at
          */
         double newTheta = theta + this.angle - this.offset;
-        packet.put("newTheta", newTheta);
 
         /*
             Get the angle of the wheel and subtract the newTheta (because newTheta is clockwise and
@@ -81,8 +78,6 @@ public class FieldCentric {
          */
         for (int i = 0; i < motors.length; i++) {
             motors[i].setPower(Math.sin(wheelAngles[i] - newTheta) * r + turn);
-            packet.put("Motor " + i, motors[i].getPower());
         }
-        dashboard.sendTelemetryPacket(packet);
     }
 }

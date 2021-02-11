@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode.libraries;
 
-import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.spartronics4915.lib.T265Camera;
 
 import static java.lang.Math.PI;
 
@@ -26,8 +24,6 @@ public class Alexi {
     public Servo wobbleServo = null;
 
     public BNO055IMU imu = null;
-
-    public T265Camera camera = null;
 
     public DcMotor[] motors = null;
     public double[] angles = null;
@@ -64,7 +60,5 @@ public class Alexi {
         params.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         params.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         imu.initialize(params);
-
-        camera = new T265Camera(new Transform2d(), 0.8, hardwareMap.appContext);
     }
 }

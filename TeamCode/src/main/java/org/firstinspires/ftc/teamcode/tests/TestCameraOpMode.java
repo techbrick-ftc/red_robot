@@ -4,42 +4,30 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
-import com.arcrobotics.ftclib.geometry.Transform2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.spartronics4915.lib.T265Camera;
 
+import org.firstinspires.ftc.teamcode.libraries.Alexi;
 import org.firstinspires.ftc.teamcode.libraries.FieldCentric;
-
-import static java.lang.Math.PI;
+import org.firstinspires.ftc.teamcode.libraries.GlobalCamera;
 
 @TeleOp(name="Test T265", group="Iterative OpMode")
-@Disabled
+//@Disabled
 public class TestCameraOpMode extends OpMode
 {
     // We treat this like a singleton because there should only ever be one object per camera
-    private static T265Camera slamra = null;
-
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
+    Alexi robot = new Alexi();
 
-    FieldCentric fieldCentric;
+    FieldCentric fieldCentric = new FieldCentric();
 
     @Override
     public void init() {
         telemetry.addLine("before if");
         telemetry.update();
-
-        if (slamra == null) {
-            telemetry.addLine("before t265 init");
-            telemetry.update();
-            slamra = new T265Camera(new Transform2d(), 0.1, hardwareMap.appContext);
-            telemetry.addLine("after t265 init");
-            telemetry.update();
-        }
+        GlobalCamera.startCamera(hardwareMap);
     }
 
     @Override
@@ -48,32 +36,9 @@ public class TestCameraOpMode extends OpMode
 
     @Override
     public void start() {
-        DcMotor flMotor = hardwareMap.get(DcMotor.class, "flMotor");
-        DcMotor frMotor = hardwareMap.get(DcMotor.class, "frMotor");
-        DcMotor rlMotor = hardwareMap.get(DcMotor.class, "rlMotor");
-        DcMotor rrMotor = hardwareMap.get(DcMotor.class, "rrMotor");
+        robot.init(hardwareMap);
 
-        //flMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        //rlMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        DcMotor[] motors = {frMotor, rrMotor, rlMotor, flMotor};
-        double[] angles = {PI/4, 3*PI/4, 5*PI/4, 7*PI/4};
-
-        BNO055IMU imu = hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters params = new BNO055IMU.Parameters();
-        params.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        params.angleUnit = BNO055IMU.AngleUnit.RADIANS;
-
-        imu.initialize(params);
-        fieldCentric = new FieldCentric();
-
-        try {
-            fieldCentric.setUp(motors, angles, imu);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        slamra.start();
+        fieldCentric.setUp(robot.motors, robot.angles, robot.imu);
     }
 
     @Override
@@ -83,7 +48,7 @@ public class TestCameraOpMode extends OpMode
         TelemetryPacket packet = new TelemetryPacket();
         Canvas field = packet.fieldOverlay();
 
-        T265Camera.CameraUpdate up = slamra.getLastReceivedCameraUpdate();
+        T265Camera.CameraUpdate up = GlobalCamera.getUpdate();
         if (up == null) return;
 
         // Driving
@@ -101,13 +66,9 @@ public class TestCameraOpMode extends OpMode
 
         packet.put("X", translation.getX());
         packet.put("Y", translation.getY());
+        packet.put("Confidence", up.confidence);
 
         dashboard.sendTelemetryPacket(packet);
-    }
-
-    @Override
-    public void stop() {
-        slamra.stop();
     }
 
 }

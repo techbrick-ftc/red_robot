@@ -26,7 +26,6 @@ public class CameraMain {
     private DcMotor[] motors;
     private double[] motorSpeeds;
     private double[] angles;
-    private T265Camera camera = null;
     private Translation2d translation2d;
     private BNO055IMU imu;
     private AxesReference axesReference;
@@ -43,27 +42,26 @@ public class CameraMain {
     boolean yComplete = false;
     boolean turnComplete = false;
 
-    public void setUpInternal(DcMotor[] motors, double[] angles, T265Camera camera, BNO055IMU imu, AxesReference axesReference, Telemetry telemetry) {
+    public void setUpInternal(DcMotor[] motors, double[] angles, BNO055IMU imu, AxesReference axesReference, Telemetry telemetry) {
         if (motors.length != angles.length) {
             throw new RuntimeException("Motor array length and angle array length are not the same! Check your code!");
         }
         this.motors = motors;
         this.motorSpeeds = new double[motors.length];
         this.angles = angles;
-        this.camera = camera;
         this.imu = imu;
         this.axesReference = axesReference;
         this.telemetry = telemetry;
     }
 
     public void setPoseInternal(Pose2d pose) {
-        this.camera.setPose(pose);
+        GlobalCamera.setPose(pose);
     }
 
     public boolean goToInternal(double moveX, double moveY, double theta, double speed) {
         // Wrap theta to localTheta
         double localTheta = wrap(theta);
-        T265Camera.CameraUpdate up = camera.getLastReceivedCameraUpdate();
+        T265Camera.CameraUpdate up = GlobalCamera.getUpdate();
         if (up.confidence == T265Camera.PoseConfidence.Failed) { telemetry.addLine("Failed"); telemetry.update(); return false; }
 
         this.translation2d = up.pose.getTranslation();
@@ -144,7 +142,7 @@ public class CameraMain {
     }
 
     public Translation2d getPosition() {
-        Translation2d current = camera.getLastReceivedCameraUpdate().pose.getTranslation();
+        Translation2d current = GlobalCamera.getUpdate().pose.getTranslation();
         return new Translation2d(current.getX() / 0.0254, current.getY() / 0.0254);
     }
 

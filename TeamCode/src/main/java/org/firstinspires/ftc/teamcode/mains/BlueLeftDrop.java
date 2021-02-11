@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.libraries.AutonomousFunctions;
 import org.firstinspires.ftc.teamcode.libraries.CameraAuto;
 import org.firstinspires.ftc.teamcode.libraries.CameraType;
 import org.firstinspires.ftc.teamcode.libraries.EasyOpenCVImportable;
+import org.firstinspires.ftc.teamcode.libraries.GlobalCamera;
 import org.firstinspires.ftc.teamcode.libraries.TeleAuto;
 
 @Autonomous(name="Blue Left Drop", group="Blue")
@@ -26,7 +27,9 @@ public class BlueLeftDrop extends LinearOpMode implements TeleAuto {
         robot.init(hardwareMap);
         robot.wobbleServo.setPosition(-1);
 
-        drive.setUp(robot.motors, robot.angles, robot.camera, robot.imu, AxesReference.EXTRINSIC, telemetry);
+        GlobalCamera.startCamera(hardwareMap);
+
+        drive.setUp(robot.motors, robot.angles, robot.imu, AxesReference.EXTRINSIC, telemetry);
         drive.setPose(new Pose2d(-56, 46, new Rotation2d()));
 
         openCV.init(CameraType.WEBCAM, hardwareMap);
@@ -36,7 +39,6 @@ public class BlueLeftDrop extends LinearOpMode implements TeleAuto {
         waitForStart();
 
         if (opModeIsActive()) {
-            robot.camera.start();
             openCV.startDetection();
             while (openCV.getDetection().equals(EasyOpenCVImportable.RingNumber.UNKNOWN)) { idle(); }
             et.reset();
